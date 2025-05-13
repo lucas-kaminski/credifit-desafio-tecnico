@@ -1,3 +1,151 @@
+# Entrega do desafio "Fullstack Challenge - Dictionary" by Coodesh
+
+## Log de desenvolvimento
+
+### 12/05/2025
+
+Tarde (15m)
+
+- Fiz a abertura do desafio pelo link recebido no e-mail. Fiz a leitura do desafio, enviei um e-mail para o recrutador perguntando se estaria em tempo hábil para realizar o desafio. Recebo o retorno positivo e organizo-me para começar o desafio a noite.
+- Faço o fork do repositório, configuro como público e clono para minha máquina.
+
+Noite (1h)
+
+- Reli o README.md e durante o processo fiz o [checklist de entrega](#checklist-da-entrega)
+- Iniciei o [dev log](#log-de-desenvolvimento)
+- Iniciei o [backlog](#backlog)
+-
+
+## Checklist da entrega
+
+### Antes de começar
+
+- [x] Fork público do repositório
+- [x] Usar as linguagens definidas na vaga
+- [ ] Deadline de 5 dias
+- [x] Documentar processo de investigação e desenvolvimento da atividade.
+
+### Instruções iniciais (Frontend)
+
+- [x] Com ou sem framework
+- [x] Estilização
+- [ ] CSS Flex-box e Grid
+- [ ] Design mobile first
+- [ ] Gestão de dados
+- [ ] Conceitos de programação funcional em JS
+- [ ] Atenção para usabilidade
+- [ ] Adequar a interface com elementos visuais
+
+### Instruções iniciais (Backend)
+
+- [x] Uma API
+- [x] Banco de dados
+
+### Organização
+
+- [ ] Separar código backend do frontend
+- [ ] Clean code
+- [ ] Validação de chamadas assíncronas para evitar tratamento
+
+### Backend
+
+- [ ] Validar todos casos de uso
+  - [ ] Capacidade de login
+  - [ ] Visualizar lista de palavras
+  - [ ] Guardar histórico de palavras visualizadas
+  - [ ] Visualizar histórico de palavras guardadas
+  - [ ] Guardar palavra como favorita
+  - [ ] Apagar uma palavra favorita
+  - [ ] Proxy para a API Free Dictionary
+- [ ] Implementar todas as rotas
+  - [ ] GET "/"
+  - [ ] POST "/auth/signup"
+  - [ ] POST "/auth/signin"
+  - [ ] GET "/entries/en"
+  - [ ] GET "/entries/en/:word"
+  - [ ] POST "/entries/en/:word/favorite"
+  - [ ] DELETE "/entries/en/:word/unfavorite"
+  - [ ] GET "/user/me"
+  - [ ] GET "/user/me/history"
+  - [ ] GET "/user/me/favorites"
+  - [ ] 200
+  - [ ] 204
+  - [ ] 400
+- [ ] Script para alimentar o banco de dados
+- [ ] Documentação da API no OpenAPI 3.0
+- [ ] Unit tests para os endpoints da API
+- [ ] Docker no projeto
+- [ ] Deploy em algum servidor
+- [ ] Paginação por cursores com retorno padrão
+- [ ] Cache o resultado das requisições com headers específicos na resposta
+- [ ] Definir todas as boas práticas, ver quais não estão elencadas acima e tratar
+
+### Frontend
+
+- [ ] Atender os casos de uso
+  - [ ] Capacidade de login
+  - [ ] Lista de palavras com rolagem infinita
+  - [ ] Visualizar uma palavra, significado e fonética
+  - [ ] Salvar como favorito
+  - [ ] Remover palavra como favorito
+  - [ ] Lista de palavras vista anteriormente
+- [ ] Seguir o wireframe definido
+  - Wireframe não possui tela de signup/signin
+- [ ] Unit ou E2E tests
+- [ ] Docker
+- [ ] URL com params de busca
+- [ ] SSR
+- [ ] PWA
+
+### Entrega final
+
+- [ ] Título do projeto
+- [ ] Descrição em frase
+- [ ] Lista de ferramentas utilizadas
+- [ ] Como instalar e usar o projeto
+- [ ] Não esquecer do .gitignore
+- [ ] Colocar referência do challenge
+
+## Backlog
+
+- [x] Fork e clone do repositório
+  - [Repositório no github](https://github.com/lucas-kaminski/credifit-desafio-tecnico)
+- [x] Definição das tecnologias da vaga e alinhamento com o desafio
+  - Tecnologias citadas na vaga
+    - React
+    - Nest
+    - TypeScript
+    - SQL -> PostgresSQL
+    - Docker/Kubernetes
+    - CI/CD
+    - Mensageria (Kafka, SNS/SQS) e microserviços.
+  - Escolhas INICIAIS para o desafio
+    - Para o frontend:
+      - TypeScript, React com NextJS para PWA/SSR
+      - As outras instruções iniciais eu prefiro adaptar conforme desenvolvimento do desafio
+    - Para o backend:
+      - TypeScript, NodeJS com NestJS para API Rest
+    - Para o banco de dados
+      - SQL, PostgreSQL com Prisma ORM
+      - NoSQL, MongoDB com Mongoose
+- [x] Oficializar um padrão de documentação "Dev Log" para a entrega
+  - Dev log com registro de todas sprints de desenvolvimento, o que foi feito e próximos passos
+- [ ] Iniciar o git workflow
+- [ ] Configurar o monorepo
+- [ ] Definir critérios de qualidade para o desenvolvimento
+
+<br/>
+
+---
+
+<br/>
+
+# README original
+
+As informações que estão acima são minhas anotações e reflexões sobre o desafio, conforme orientações do desafio.
+
+Toda informação abaixo é a definição original do desafio que foi clonado junto com o repositório.
+
 # Fullstack Challenge - Dictionary
 
 ## Introdução
@@ -9,7 +157,7 @@ Nesse desafio você deverá desenvolver um aplicativo para listar palavras em in
 [SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
 
 ### Antes de começar
- 
+
 - Prepare o projeto para ser disponibilizado no Github, copiando o conteúdo deste repositório para o seu (ou utilize o fork do projeto e aponte para o Github). Confirme que a visibilidade do projeto é pública (não esqueça de colocar no readme a referência a este challenge);
 - O projeto deve utilizar a Linguagem específica na sua Vaga (caso esteja se candidatando). Por exempo: Python, R, Scala e entre outras;
 - Considere como deadline 5 dias a partir do início do desafio. Caso tenha sido convidado a realizar o teste e não seja possível concluir dentro deste período, avise a pessoa que o convidou para receber instruções sobre o que fazer.
@@ -20,6 +168,7 @@ Nesse desafio você deverá desenvolver um aplicativo para listar palavras em in
 - Utilize as seguintes tecnologias:
 
 #### Tecnologias (Front-End):
+
 - Com ou sem framework (React, Angular, Vue.js, Javascript Vanilla, ou outro da sua escolha)
 - Estilização (Material UI, Semantic UI, Styled Components, etc). Ou escrever o seu proprio sob medida 👌
 - CSS Flexbox + CSS Grid
@@ -30,12 +179,14 @@ Nesse desafio você deverá desenvolver um aplicativo para listar palavras em in
 Atente-se, ao desenvolver a aplicação front-end, para conceitos de usabilidade e adeque a interface com elementos visuais para os usuários do seu sistema.
 
 #### Tecnologias (Back-End):
+
 - API (Node.js, PHP, Ruby, ou outra da sua escolha) com ou sem uso de frameworks
 - Banco de dados (Postgres, MySQL, MongoDB, etc).
 
 Como sugestões, pode criar um banco de dados grátis **MongoDB** usando Atlas: https://www.mongodb.com/cloud/atlas. Para conhecer outras plataformas de banco de dados, acesse https://coodesh.com/blog/candidates/heroku-acabou-e-agora-veja-alternativas/
 
 #### Organização:
+
 - Separar o repositório do back do front
 - Aplicação de padrões Clean Code
 - Validação de chamadas assíncronas para evitar travamentos
@@ -46,107 +197,100 @@ Conforme indicado na documentação da API, a estrutura de dados presente retorn
 
 ```json
 [
-    {
-        "word": "hello",
-        "phonetics": [
-            {
-                "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3",
-                "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=75797336",
-                "license": {
-                    "name": "BY-SA 4.0",
-                    "url": "https://creativecommons.org/licenses/by-sa/4.0"
-                }
-            },
-            {
-                "text": "/həˈləʊ/",
-                "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-uk.mp3",
-                "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=9021983",
-                "license": {
-                    "name": "BY 3.0 US",
-                    "url": "https://creativecommons.org/licenses/by/3.0/us"
-                }
-            },
-            {
-                "text": "/həˈloʊ/",
-                "audio": ""
-            }
-        ],
-        "meanings": [
-            {
-                "partOfSpeech": "noun",
-                "definitions": [
-                    {
-                        "definition": "\"Hello!\" or an equivalent greeting.",
-                        "synonyms": [],
-                        "antonyms": []
-                    }
-                ],
-                "synonyms": [
-                    "greeting"
-                ],
-                "antonyms": []
-            },
-            {
-                "partOfSpeech": "verb",
-                "definitions": [
-                    {
-                        "definition": "To greet with \"hello\".",
-                        "synonyms": [],
-                        "antonyms": []
-                    }
-                ],
-                "synonyms": [],
-                "antonyms": []
-            },
-            {
-                "partOfSpeech": "interjection",
-                "definitions": [
-                    {
-                        "definition": "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
-                        "synonyms": [],
-                        "antonyms": [],
-                        "example": "Hello, everyone."
-                    },
-                    {
-                        "definition": "A greeting used when answering the telephone.",
-                        "synonyms": [],
-                        "antonyms": [],
-                        "example": "Hello? How may I help you?"
-                    },
-                    {
-                        "definition": "A call for response if it is not clear if anyone is present or listening, or if a telephone conversation may have been disconnected.",
-                        "synonyms": [],
-                        "antonyms": [],
-                        "example": "Hello? Is anyone there?"
-                    },
-                    {
-                        "definition": "Used sarcastically to imply that the person addressed or referred to has done something the speaker or writer considers to be foolish.",
-                        "synonyms": [],
-                        "antonyms": [],
-                        "example": "You just tried to start your car with your cell phone. Hello?"
-                    },
-                    {
-                        "definition": "An expression of puzzlement or discovery.",
-                        "synonyms": [],
-                        "antonyms": [],
-                        "example": "Hello! What’s going on here?"
-                    }
-                ],
-                "synonyms": [],
-                "antonyms": [
-                    "bye",
-                    "goodbye"
-                ]
-            }
-        ],
+  {
+    "word": "hello",
+    "phonetics": [
+      {
+        "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3",
+        "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=75797336",
         "license": {
-            "name": "CC BY-SA 3.0",
-            "url": "https://creativecommons.org/licenses/by-sa/3.0"
-        },
-        "sourceUrls": [
-            "https://en.wiktionary.org/wiki/hello"
-        ]
-    }
+          "name": "BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0"
+        }
+      },
+      {
+        "text": "/həˈləʊ/",
+        "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-uk.mp3",
+        "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=9021983",
+        "license": {
+          "name": "BY 3.0 US",
+          "url": "https://creativecommons.org/licenses/by/3.0/us"
+        }
+      },
+      {
+        "text": "/həˈloʊ/",
+        "audio": ""
+      }
+    ],
+    "meanings": [
+      {
+        "partOfSpeech": "noun",
+        "definitions": [
+          {
+            "definition": "\"Hello!\" or an equivalent greeting.",
+            "synonyms": [],
+            "antonyms": []
+          }
+        ],
+        "synonyms": ["greeting"],
+        "antonyms": []
+      },
+      {
+        "partOfSpeech": "verb",
+        "definitions": [
+          {
+            "definition": "To greet with \"hello\".",
+            "synonyms": [],
+            "antonyms": []
+          }
+        ],
+        "synonyms": [],
+        "antonyms": []
+      },
+      {
+        "partOfSpeech": "interjection",
+        "definitions": [
+          {
+            "definition": "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
+            "synonyms": [],
+            "antonyms": [],
+            "example": "Hello, everyone."
+          },
+          {
+            "definition": "A greeting used when answering the telephone.",
+            "synonyms": [],
+            "antonyms": [],
+            "example": "Hello? How may I help you?"
+          },
+          {
+            "definition": "A call for response if it is not clear if anyone is present or listening, or if a telephone conversation may have been disconnected.",
+            "synonyms": [],
+            "antonyms": [],
+            "example": "Hello? Is anyone there?"
+          },
+          {
+            "definition": "Used sarcastically to imply that the person addressed or referred to has done something the speaker or writer considers to be foolish.",
+            "synonyms": [],
+            "antonyms": [],
+            "example": "You just tried to start your car with your cell phone. Hello?"
+          },
+          {
+            "definition": "An expression of puzzlement or discovery.",
+            "synonyms": [],
+            "antonyms": [],
+            "example": "Hello! What’s going on here?"
+          }
+        ],
+        "synonyms": [],
+        "antonyms": ["bye", "goodbye"]
+      }
+    ],
+    "license": {
+      "name": "CC BY-SA 3.0",
+      "url": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "sourceUrls": ["https://en.wiktionary.org/wiki/hello"]
+  }
 ]
 ```
 
@@ -174,46 +318,49 @@ Retornar a mensagem "Fullstack Challenge 🏅 - Dictionary"
 
 ```json
 {
-    "message": "Fullstack Challenge 🏅 - Dictionary"
+  "message": "Fullstack Challenge 🏅 - Dictionary"
 }
 ```
+
 </details>
 <details open>
 <summary>[POST] /auth/signup</summary>
 
 ```json
 {
-    "name": "User 1",
-    "email": "example@email.com",
-    "password": "test"
+  "name": "User 1",
+  "email": "example@email.com",
+  "password": "test"
 }
 ```
 
 ```json
 {
-    "id": "f3a10cec013ab2c1380acef",
-    "name": "User 1",
-    "token": "Bearer JWT.Token"
+  "id": "f3a10cec013ab2c1380acef",
+  "name": "User 1",
+  "token": "Bearer JWT.Token"
 }
 ```
+
 </details>
 <details open>
 <summary>[POST] /auth/signin</summary>
 
 ```json
 {
-    "email": "example@email.com",
-    "password": "test"
+  "email": "example@email.com",
+  "password": "test"
 }
 ```
 
 ```json
 {
-    "id": "f3a10cec013ab2c1380acef",
-    "name": "User 1",
-    "token": "Bearer JWT.Token"
+  "id": "f3a10cec013ab2c1380acef",
+  "name": "User 1",
+  "token": "Bearer JWT.Token"
 }
 ```
+
 </details>
 <details open>
 <summary>[GET] /entries/en</summary>
@@ -225,19 +372,15 @@ Retornar a lista de palavras do dicionário, com paginação e suporte a busca. 
 
 ```json
 {
-    "results": [
-        "fire",
-        "firefly",
-        "fireplace",
-        "fireman"
-    ],
-    "totalDocs": 20,
-    "page": 1,
-    "totalPages": 5, 
-    "hasNext": true,
-    "hasPrev": false
+  "results": ["fire", "firefly", "fireplace", "fireman"],
+  "totalDocs": 20,
+  "page": 1,
+  "totalPages": 5,
+  "hasNext": true,
+  "hasPrev": false
 }
 ```
+
 </details>
 <details open>
 <summary>[GET] /entries/en/:word</summary>
@@ -249,20 +392,20 @@ Retornar as informações da palavra especificada e registra o histórico de ace
 <summary>[POST] /entries/en/:word/favorite</summary>
 <p>
 Salva a palavra na lista de favoritas (retorno de dados no body é opcional)
-</p> 
+</p>
 </details>
 <details open>
 <summary>[DELETE] /entries/en/:word/unfavorite</summary>
 <p>
 Remover a palavra da lista de favoritas (retorno de dados no body é opcional)
 </p>
-</details> 
+</details>
 <details open>
 <summary>[GET] /user/me</summary>
 <p>
 Retornar o perfil do usúario
 </p>
-</details> 
+</details>
 <details open>
 <summary>[GET] /user/me/history</summary>
 <p>
@@ -271,32 +414,33 @@ Retornar a lista de palavras visitadas
 
 ```json
 {
-    "results": [
-        {
-            "word": "fire",
-            "added": "2022-05-05T19:28:13.531Z"
-        },
-        {
-            "word": "firefly",
-            "added": "2022-05-05T19:28:44.021Z"
-        },
-        {
-            "word": "fireplace",
-            "added": "2022-05-05T19:29:28.631Z"
-        },
-        {
-            "word": "fireman",
-            "added": "2022-05-05T19:30:03.711Z"
-        }
-    ],
-    "totalDocs": 20,
-    "page": 2,
-    "totalPages": 5,
-    "hasNext": true,
-    "hasPrev": true
+  "results": [
+    {
+      "word": "fire",
+      "added": "2022-05-05T19:28:13.531Z"
+    },
+    {
+      "word": "firefly",
+      "added": "2022-05-05T19:28:44.021Z"
+    },
+    {
+      "word": "fireplace",
+      "added": "2022-05-05T19:29:28.631Z"
+    },
+    {
+      "word": "fireman",
+      "added": "2022-05-05T19:30:03.711Z"
+    }
+  ],
+  "totalDocs": 20,
+  "page": 2,
+  "totalPages": 5,
+  "hasNext": true,
+  "hasPrev": true
 }
 ```
-</details> 
+
+</details>
 <details open>
 <summary>[GET] /user/me/favorites</summary>
 <p>
@@ -305,42 +449,43 @@ Retornar a lista de palavras marcadas como favoritas
 
 ```json
 {
-    "results": [
-        {
-            "word": "fire",
-            "added": "2022-05-05T19:30:23.928Z"
-        },
-        {
-            "word": "firefly",
-            "added": "2022-05-05T19:30:24.088Z"
-        },
-        {
-            "word": "fireplace",
-            "added": "2022-05-05T19:30:28.963Z"
-        },
-        {
-            "word": "fireman",
-            "added": "2022-05-05T19:30:33.121Z"
-        }
-    ],
-    "totalDocs": 20,
-    "page": 2,
-    "totalPages": 5,
-    "hasNext": true,
-    "hasPrev": true
+  "results": [
+    {
+      "word": "fire",
+      "added": "2022-05-05T19:30:23.928Z"
+    },
+    {
+      "word": "firefly",
+      "added": "2022-05-05T19:30:24.088Z"
+    },
+    {
+      "word": "fireplace",
+      "added": "2022-05-05T19:30:28.963Z"
+    },
+    {
+      "word": "fireman",
+      "added": "2022-05-05T19:30:33.121Z"
+    }
+  ],
+  "totalDocs": 20,
+  "page": 2,
+  "totalPages": 5,
+  "hasNext": true,
+  "hasPrev": true
 }
 ```
 
 </details>
 
 Além disso, os endpoints devem utilizar os seguintes códigos de status:
+
 - 200: sucesso com body ou sem body
 - 204: sucesso sem body
 - 400: mensagem de erro em formato humanizado, ou seja, sem informações internas e códigos de erro:
 
 ```json
 {
-    "message": "Error message"
+  "message": "Error message"
 }
 ```
 
@@ -358,23 +503,19 @@ Além disso, os endpoints devem utilizar os seguintes códigos de status:
 
 ```json
 {
-    "results": [
-        "fire",
-        "firefly",
-        "fireplace",
-        "fireman"
-    ],
-    "totalDocs": 20,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmjJkOGI5In0",
-    "next": "eyIkb2lkIjoiNTgwZmQxNm1NjJkOGI4In0",
-    "hasNext": true,
-    "hasPrev": true,
+  "results": ["fire", "firefly", "fireplace", "fireman"],
+  "totalDocs": 20,
+  "previous": "eyIkb2lkIjoiNTgwZmQxNmjJkOGI5In0",
+  "next": "eyIkb2lkIjoiNTgwZmQxNm1NjJkOGI4In0",
+  "hasNext": true,
+  "hasPrev": true
 }
 ```
 
 **Diferencial 6** - Salvar em cache o resultado das requisições ao Free Dictionary API, para agilizar a resposta em caso de buscas com parâmetros repetidos. Sugestões são usar o Redis e/ou MongoDB;
 
 O cache pode ser feito a guardar todo o corpo das respostas ou para guardar o resultado das queries do banco. Para identificar a presença de cache, será necessário adicionar os seguintes headers nas respostas:
+
 - x-cache: valores HIT (retornou dados em cache) ou MISS (precisou buscar no banco)
 - x-response-time: duração da requisição em milissegundos
 
@@ -412,10 +553,10 @@ Nessa etapa você deverá desenvolver uma aplicação web para consumir a API qu
 - Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
 - Como instalar e usar o projeto (instruções)
 - Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
-- Se está usando github pessoal, referencie que é um challenge by coodesh:  
+- Se está usando github pessoal, referencie que é um challenge by coodesh:
 
->  This is a challenge by [Coodesh](https://coodesh.com/)
+> This is a challenge by [Coodesh](https://coodesh.com/)
 
 ## Suporte
 
-Use a [nossa comunidade](https://discord.gg/rdXbEvjsWu) para tirar dúvidas sobre o processo ou envie uma mensagem diretamente a um especialista no chat da plataforma. 
+Use a [nossa comunidade](https://discord.gg/rdXbEvjsWu) para tirar dúvidas sobre o processo ou envie uma mensagem diretamente a um especialista no chat da plataforma.
