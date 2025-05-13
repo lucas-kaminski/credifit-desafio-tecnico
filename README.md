@@ -4,17 +4,18 @@
 
 ### 12/05/2025
 
-Tarde (15m)
+Tarde (+-15m)
 
 - Fiz a abertura do desafio pelo link recebido no e-mail. Fiz a leitura do desafio, enviei um e-mail para o recrutador perguntando se estaria em tempo hábil para realizar o desafio. Recebo o retorno positivo e organizo-me para começar o desafio a noite.
 - Faço o fork do repositório, configuro como público e clono para minha máquina.
 
-Noite (1h)
+Noite (+-1h 30m)
 
 - Reli o README.md e durante o processo fiz o [checklist de entrega](#checklist-da-entrega)
 - Iniciei o [dev log](#log-de-desenvolvimento)
 - Iniciei o [backlog](#backlog)
--
+- Criei a branch `develop` e defini o padrão de branches
+- Deixei para amanhã para verificar os critérios de qualidade para o desenvolvimento e criar o TASK-1 que seria a configuração inicial do projeto
 
 ## Checklist da entrega
 
@@ -130,9 +131,13 @@ Noite (1h)
       - NoSQL, MongoDB com Mongoose
 - [x] Oficializar um padrão de documentação "Dev Log" para a entrega
   - Dev log com registro de todas sprints de desenvolvimento, o que foi feito e próximos passos
-- [ ] Iniciar o git workflow
-- [ ] Configurar o monorepo
+- [x] Iniciar o git workflow
+  - branch `main` para o código final
+  - branch `develop` para o código em desenvolvimento
+  - branch `TASK-X` para os blocos de tarefas
 - [ ] Definir critérios de qualidade para o desenvolvimento
+- [ ] TASK-1
+  - [ ] Configurar os projetos
 
 <br/>
 
