@@ -1,7 +1,33 @@
-# Backend
+# Backend (estrutura atualizada)
 
-Esta pasta contém o código-fonte, configurações e recursos relacionados ao backend do projeto.
+Este diretório contém o backend do projeto.
 
-- `src/`: código-fonte principal (NestJS)
-- `prisma/`: arquivos de migração e schema do banco de dados (Prisma)
-- `tests/`: testes automatizados do backend
+O comando utilizado para inicializar o projeto foi:
+
+```sh
+nest new . --package-manager=yarn --skip-git
+```
+
+Que gerou um boilerplate com as dependências necessárias para o projeto.
+
+## Estrutura
+
+- `.` - Arquivos de configuração do projeto e suas dependências
+- `src/` — Código-fonte principal
+- `prisma/` — Arquivos de migração e schema do banco de dados
+- `test/` — Testes automatizados
+
+## Comandos principais
+
+- Instalar dependências:
+  ```sh
+  yarn install
+  ```
+- Rodar em modo desenvolvimento:
+  ```sh
+  yarn start:dev
+  ```
+- Rodar testes:
+  ```sh
+  yarn test
+  ```
