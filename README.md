@@ -150,7 +150,7 @@ Noite (+-1h 30m)
 
 ### TASK-1: Setup Inicial
 
-- [ ] Configurar a estrutura de pastas
+- [x] Configurar a estrutura de pastas
 - [ ] Configurar o .gitignore
 - [ ] Configurar variáveis de ambiente (.env)
 
