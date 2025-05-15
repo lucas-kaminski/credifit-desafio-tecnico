@@ -17,6 +17,10 @@ Noite (+-1h 30m)
 - Criei a branch `develop` e defini o padrão de branches
 - Deixei para amanhã para verificar os critérios de qualidade para o desenvolvimento e criar o TASK-1 que seria a configuração inicial do projeto
 
+### 15/05/2025
+
+- Finalizei a task-0, completando backlog
+
 ## Checklist da entrega
 
 ### Antes de começar
@@ -109,9 +113,11 @@ Noite (+-1h 30m)
 
 ## Backlog
 
-- [x] Fork e clone do repositório
-  - [Repositório no github](https://github.com/lucas-kaminski/credifit-desafio-tecnico)
-- [x] Definição das tecnologias da vaga e alinhamento com o desafio
+### TASK-0: Entendimento do desafio
+
+- [x] Fork e clone do repositório [Repositório no github](https://github.com/lucas-kaminski/credifit-desafio-tecnico)
+- [x] Definição das tecnologias da vaga e alinhamento
+      com o desafio
   - Tecnologias citadas na vaga
     - React
     - Nest
@@ -123,21 +129,115 @@ Noite (+-1h 30m)
   - Escolhas INICIAIS para o desafio
     - Para o frontend:
       - TypeScript, React com NextJS para PWA/SSR
-      - As outras instruções iniciais eu prefiro adaptar conforme desenvolvimento do desafio
+      - As outras instruções iniciais eu prefiro
+        adaptar conforme desenvolvimento do desafio
     - Para o backend:
       - TypeScript, NodeJS com NestJS para API Rest
     - Para o banco de dados
       - SQL, PostgreSQL com Prisma ORM
       - NoSQL, MongoDB com Mongoose
-- [x] Oficializar um padrão de documentação "Dev Log" para a entrega
-  - Dev log com registro de todas sprints de desenvolvimento, o que foi feito e próximos passos
+    - Reforçando que uma diretriz inicial, pode ser adaptada conforme o desenvolvimento do desafio
+- [x] Oficializar um padrão de documentação "Dev Log"
+      para a entrega
 - [x] Iniciar o git workflow
   - branch `main` para o código final
   - branch `develop` para o código em desenvolvimento
   - branch `TASK-X` para os blocos de tarefas
-- [ ] Definir critérios de qualidade para o desenvolvimento
-- [ ] TASK-1
-  - [ ] Configurar os projetos
+- [x] Definir critérios de qualidade para o
+      desenvolvimento
+- [x] Estudar a documentação da API Free Dictionary
+- [x] Definir as tasks
+
+### TASK-1: Setup Inicial
+
+- [ ] Configurar a estrutura de pastas
+- [ ] Configurar o .gitignore
+- [ ] Configurar variáveis de ambiente (.env)
+
+### TASK-2: Configuração do backend
+
+- [ ] Inicializar projeto backend com NestJS
+- [ ] Configurar ESLint, Prettier e Husky
+- [ ] Configurar conexão com banco de dados (PostgreSQL via Prisma)
+- [ ] Criar entidades e models
+  - [ ] User
+  - [ ] Word
+  - [ ] Favorite
+  - [ ] History
+- [ ] Implementar middleware de JWT
+- [ ] Implementar proxy para Free Dictionary API
+
+### TASK-3: Endpoints
+
+- [ ] Implementar endpoint GET "/"
+  - [ ] Teste unitário
+- [ ] Implementar tratamento de erros (200, 204, 400)
+  - [ ] Teste unitário
+- [ ] Implementar endpoint POST "/auth/signup"
+  - [ ] Teste unitário
+- [ ] Implementar endpoint POST "/auth/signin"
+  - [ ] Teste unitário
+- [ ] Implementar endpoint GET "/entries/en" (paginação, busca)
+  - [ ] Teste unitário
+- [ ] Implementar endpoint GET "/entries/en/:word" (registra histórico)
+  - [ ] Teste unitário
+- [ ] Implementar endpoint POST "/entries/en/:word/favorite"
+  - [ ] Teste unitário
+- [ ] Implementar endpoint DELETE "/entries/en/:word/unfavorite"
+  - [ ] Teste unitário
+- [ ] Implementar endpoint GET "/user/me"
+  - [ ] Teste unitário
+- [ ] Implementar endpoint GET "/user/me/history" (paginação)
+  - [ ] Teste unitário
+- [ ] Implementar endpoint GET "/user/me/favorites" (paginação)
+  - [ ] Teste unitário
+
+### TASK-4: Melhorias do backend
+
+- [ ] Implementar script para importar wordList para o banco
+- [ ] Implementar cache de requisições à Free Dictionary API (Redis/MongoDB)
+- [ ] Adicionar headers x-cache e x-response-time nas respostas
+- [ ] Implementar paginação por cursores (diferencial)
+- [ ] Escrever testes unitários para todos endpoints
+- [ ] Documentar API com OpenAPI 3.0 (Swagger)
+- [ ] Dockerizar backend
+- [ ] Preparar backend para deploy
+
+### TASK-5: Configuração do frontend
+
+- [ ] Inicializar projeto frontend com Next.js (React + TypeScript)
+- [ ] Configurar ESLint, Prettier e Husky
+- [ ] Configurar variáveis de ambiente (.env)
+
+### TASK-6: Funcionalidades do frontend
+
+- [ ] Implementar tela de login
+- [ ] Implementar tela de listagem de palavras (infinite scroll)
+- [ ] Implementar tela de visualização de palavra (significados, fonética)
+- [ ] Implementar funcionalidade de favoritar/desfavoritar palavra
+- [ ] Implementar tela de histórico de palavras visualizadas
+- [ ] Implementar design mobile first
+- [ ] Implementar estilização com CSS Flexbox e Grid
+- [ ] Implementar usabilidade e acessibilidade
+- [ ] Implementar URL com parâmetros de busca
+- [ ] Implementar SSR (Server Side Rendering)
+- [ ] Implementar PWA
+- [ ] Escrever testes unitários ou E2E
+- [ ] Dockerizar frontend
+- [ ] Preparar frontend para deploy
+
+### TASK-7: DevOps
+
+- [ ] Criar arquivos Dockerfile e docker-compose.yml
+- [ ] Realizar deploy do backend
+- [ ] Realizar deploy do frontend
+
+### TASK-8: Documentação e Entrega
+
+- [ ] Atualizar README com título, descrição, tecnologias, instruções de uso
+- [ ] Adicionar referência ao challenge by Coodesh
+- [ ] Documentar decisões técnicas e critérios de qualidade
+- [ ] Checklist final de entrega
 
 <br/>
 
@@ -256,7 +356,7 @@ Conforme indicado na documentação da API, a estrutura de dados presente retorn
         "partOfSpeech": "interjection",
         "definitions": [
           {
-            "definition": "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
+            "definition": "A greeting (salutation) said when meeting someone or acknowledging someone's arrival or presence.",
             "synonyms": [],
             "antonyms": [],
             "example": "Hello, everyone."
@@ -283,7 +383,7 @@ Conforme indicado na documentação da API, a estrutura de dados presente retorn
             "definition": "An expression of puzzlement or discovery.",
             "synonyms": [],
             "antonyms": [],
-            "example": "Hello! What’s going on here?"
+            "example": "Hello! What's going on here?"
           }
         ],
         "synonyms": [],
