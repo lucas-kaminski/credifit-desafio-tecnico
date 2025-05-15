@@ -159,6 +159,7 @@ Noite (+-1h 30m)
 - [x] Configurar ESLint, Prettier e Husky
 - [x] Configurar conexão com banco de dados (PostgreSQL via Prisma)
 - [x] Configurar variáveis de ambiente (.env)
+- [x] Dockerizar o PostgresSQL
 - [ ] Criar entidades e models
   - [ ] User
   - [ ] Word

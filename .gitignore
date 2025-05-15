@@ -1,58 +1,10 @@
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Logs
-logs/
-*.log
-
-# Build
-/dist/
-/build/
-/.next/
-/.turbo/
-
-# IDEs
-.vscode/
-.idea/
-*.swp
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Docker
-*.local
-Dockerfile*
-docker-compose*
-
-# Prisma
-/prisma/dev.db
-/prisma/dev.db-journal
-
-# Next.js
-.next/
-out/
-
-# Coverage
-coverage/
-
-# Test
-*.test.ts.snap
-
-# Misc
-*.tgz
-*.bak
-*.tmp
-
-# Monorepo
 backend/node_modules/
 frontend/node_modules/
 shared/node_modules/
+
 backend/.env*
 !backend/.env.template
+
 frontend/.env*
+
 shared/.env* 
