@@ -156,9 +156,9 @@ Noite (+-1h 30m)
 ### TASK-2: Configuração do backend
 
 - [x] Inicializar projeto backend com NestJS
-- [ ] Configurar ESLint, Prettier e Husky
-- [ ] Configurar conexão com banco de dados (PostgreSQL via Prisma)
-- [ ] Configurar variáveis de ambiente (.env)
+- [x] Configurar ESLint, Prettier e Husky
+- [x] Configurar conexão com banco de dados (PostgreSQL via Prisma)
+- [x] Configurar variáveis de ambiente (.env)
 - [ ] Criar entidades e models
   - [ ] User
   - [ ] Word

@@ -9,10 +9,6 @@ pnpm-debug.log*
 logs/
 *.log
 
-# Env
-.env*
-.env.*
-
 # Build
 /dist/
 /build/
@@ -57,5 +53,6 @@ backend/node_modules/
 frontend/node_modules/
 shared/node_modules/
 backend/.env*
+!backend/.env.template
 frontend/.env*
 shared/.env* 
