@@ -4,6 +4,8 @@ shared/node_modules/
 
 backend/.env*
 !backend/.env.template
+backend/downloads/*
+!backend/downloads/.gitkeep
 
 frontend/.env*
 

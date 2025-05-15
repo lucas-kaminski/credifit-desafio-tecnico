@@ -20,6 +20,11 @@ Noite (+-1h 30m)
 ### 15/05/2025
 
 - Finalizei a task-0, completando backlog
+- Iniciei e finalizei a task-1, configurando o projeto monorepo no geral
+- Iniciei a task-2, configurando o projeto backend e suas ferramentas, executei até a definição completa do banco de dados e sua primeira migração
+- Com o banco estruturado, iniciei a task-4, focando em criar o script para importar a wordList para o banco de dados
+- Finalizei o script da task-4 e retomo para a task-3, implementando os endpoints de autenticação e listagem de palavras
+-
 
 ## Checklist da entrega
 
@@ -165,8 +170,6 @@ Noite (+-1h 30m)
   - [x] Word
   - [x] Favorite
   - [x] History
-- [ ] Implementar middleware de JWT
-- [ ] Implementar proxy para Free Dictionary API
 
 ### TASK-3: Endpoints
 
@@ -178,6 +181,7 @@ Noite (+-1h 30m)
   - [ ] Teste unitário
 - [ ] Implementar endpoint POST "/auth/signin"
   - [ ] Teste unitário
+- [ ] Implementar middleware de JWT
 - [ ] Implementar endpoint GET "/entries/en" (paginação, busca)
   - [ ] Teste unitário
 - [ ] Implementar endpoint GET "/entries/en/:word" (registra histórico)
@@ -195,7 +199,7 @@ Noite (+-1h 30m)
 
 ### TASK-4: Melhorias do backend
 
-- [ ] Implementar script para importar wordList para o banco
+- [x] Implementar script para importar wordList para o banco
 - [ ] Implementar cache de requisições à Free Dictionary API (Redis/MongoDB)
 - [ ] Adicionar headers x-cache e x-response-time nas respostas
 - [ ] Implementar paginação por cursores (diferencial)
