@@ -152,13 +152,13 @@ Noite (+-1h 30m)
 
 - [x] Configurar a estrutura de pastas
 - [x] Configurar o .gitignore
-- [ ] Configurar variáveis de ambiente (.env)
 
 ### TASK-2: Configuração do backend
 
 - [ ] Inicializar projeto backend com NestJS
 - [ ] Configurar ESLint, Prettier e Husky
 - [ ] Configurar conexão com banco de dados (PostgreSQL via Prisma)
+- [ ] Configurar variáveis de ambiente (.env)
 - [ ] Criar entidades e models
   - [ ] User
   - [ ] Word
