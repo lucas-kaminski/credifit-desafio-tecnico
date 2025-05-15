@@ -160,11 +160,11 @@ Noite (+-1h 30m)
 - [x] Configurar conexão com banco de dados (PostgreSQL via Prisma)
 - [x] Configurar variáveis de ambiente (.env)
 - [x] Dockerizar o PostgresSQL
-- [ ] Criar entidades e models
-  - [ ] User
-  - [ ] Word
-  - [ ] Favorite
-  - [ ] History
+- [x] Criar entidades e models
+  - [x] User
+  - [x] Word
+  - [x] Favorite
+  - [x] History
 - [ ] Implementar middleware de JWT
 - [ ] Implementar proxy para Free Dictionary API
 

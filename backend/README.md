@@ -31,3 +31,7 @@ Que gerou um boilerplate com as dependências necessárias para o projeto.
   ```sh
   yarn test
   ```
+- Rodar as migrations do Prisma para criar as tabelas no banco de dados:
+  ```sh
+  yarn prisma migrate dev --name init
+  ```
