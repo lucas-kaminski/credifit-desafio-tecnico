@@ -100,7 +100,7 @@ describe('UserService', () => {
       expect(result).toEqual({
         results: mockHistory.map((item) => ({
           word: item.WORD.WORD,
-          added: item.CREATED_AT,
+          created_at: item.CREATED_AT,
         })),
         totalDocs: 10,
         page: 1,
@@ -132,7 +132,7 @@ describe('UserService', () => {
       expect(result).toEqual({
         results: mockFavorites.map((item) => ({
           word: item.WORD.WORD,
-          added: item.CREATED_AT,
+          created_at: item.CREATED_AT,
         })),
         totalDocs: 10,
         page: 1,

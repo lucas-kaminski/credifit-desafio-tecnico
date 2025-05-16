@@ -69,11 +69,11 @@ describe('UserController', () => {
       results: [
         {
           word: 'test1',
-          added: new Date(),
+          created_at: new Date(),
         },
         {
           word: 'test2',
-          added: new Date(),
+          created_at: new Date(),
         },
       ],
       totalDocs: 10,
@@ -106,11 +106,11 @@ describe('UserController', () => {
       results: [
         {
           word: 'test1',
-          added: new Date(),
+          created_at: new Date(),
         },
         {
           word: 'test2',
-          added: new Date(),
+          created_at: new Date(),
         },
       ],
       totalDocs: 10,

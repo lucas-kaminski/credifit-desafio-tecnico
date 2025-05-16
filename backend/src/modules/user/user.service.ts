@@ -54,7 +54,7 @@ export class UserService {
     return {
       results: history.map((item) => ({
         word: item.WORD.WORD,
-        added: item.CREATED_AT,
+        created_at: item.CREATED_AT,
       })),
       totalDocs: total,
       page,
@@ -94,7 +94,7 @@ export class UserService {
     return {
       results: favorites.map((item) => ({
         word: item.WORD.WORD,
-        added: item.CREATED_AT,
+        created_at: item.CREATED_AT,
       })),
       totalDocs: total,
       page,
