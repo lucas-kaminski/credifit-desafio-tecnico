@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
+export interface HealthResponse {
+  message: string;
+}
+
 @Injectable()
 export class HealthService {
-  getHealth(): { message: string } {
+  getHealth(): HealthResponse {
     return {
       message: 'Fullstack Challenge 🏅 - Dictionary',
     };

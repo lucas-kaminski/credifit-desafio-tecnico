@@ -177,11 +177,11 @@ Noite (+-1h 30m)
   - [x] Teste unitário
 - [x] Implementar tratamento de erros (200, 204, 400)
   - [x] Teste unitário
-- [ ] Implementar endpoint POST "/auth/signup"
-  - [ ] Teste unitário
-- [ ] Implementar endpoint POST "/auth/signin"
-  - [ ] Teste unitário
-- [ ] Implementar middleware de JWT
+- [x] Implementar endpoint POST "/auth/signup"
+  - [x] Teste unitário
+- [x] Implementar endpoint POST "/auth/signin"
+  - [x] Teste unitário
+- [x] Implementar middleware de JWT
 - [ ] Implementar endpoint GET "/entries/en" (paginação, busca)
   - [ ] Teste unitário
 - [ ] Implementar endpoint GET "/entries/en/:word" (registra histórico)
