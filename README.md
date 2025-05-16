@@ -222,7 +222,7 @@ Noite (+-1h 30m)
 
 ### TASK-6: Funcionalidades do frontend
 
-- [ ] Implementar tela de login
+- [x] Implementar tela de login
 - [ ] Implementar tela de listagem de palavras (infinite scroll)
 - [ ] Implementar tela de visualização de palavra (significados, fonética)
 - [ ] Implementar funcionalidade de favoritar/desfavoritar palavra

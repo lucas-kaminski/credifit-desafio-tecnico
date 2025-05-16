@@ -24,6 +24,8 @@ export default function LoginPage() {
         setError(data.message || 'Credenciais inválidas');
         return;
       }
+      const data = await res.json();
+      document.cookie = `auth_token=${data.token}; path=/`;
       router.push('/');
     } catch {
       setError('Erro ao conectar com o servidor');
