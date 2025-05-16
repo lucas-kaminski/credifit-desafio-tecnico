@@ -28,6 +28,8 @@ Noite (+-1h 30m)
 ### 16/05/2025
 
 - Continuei e finalizei a task-3, implementando todos os endpoints restantes e seus testes unitários
+- Dockerizei o backend pela task-4 e validei toda configuração do projeto criado até aqui
+- Iniciei a task-5, configurando o projeto frontend
 -
 
 ## Checklist da entrega
@@ -214,7 +216,7 @@ Noite (+-1h 30m)
 
 ### TASK-5: Configuração do frontend
 
-- [ ] Inicializar projeto frontend com Next.js (React + TypeScript)
+- [x] Inicializar projeto frontend com Next.js (React + TypeScript)
 - [ ] Configurar ESLint, Prettier e Husky
 - [ ] Configurar variáveis de ambiente (.env)
 

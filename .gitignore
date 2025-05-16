@@ -9,5 +9,7 @@ backend/downloads/*
 backend/dist/*
 
 frontend/.env*
+!frontend/.env.template
+
 
 shared/.env* 
