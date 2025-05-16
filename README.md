@@ -209,7 +209,7 @@ Noite (+-1h 30m)
 - [ ] Implementar paginação por cursores (diferencial)
 - [x] Escrever testes unitários para todos endpoints
 - [ ] Documentar API com OpenAPI 3.0 (Swagger)
-- [ ] Dockerizar backend
+- [x] Dockerizar backend
 - [ ] Preparar backend para deploy
 
 ### TASK-5: Configuração do frontend
