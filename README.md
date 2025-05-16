@@ -24,6 +24,10 @@ Noite (+-1h 30m)
 - Iniciei a task-2, configurando o projeto backend e suas ferramentas, executei até a definição completa do banco de dados e sua primeira migração
 - Com o banco estruturado, iniciei a task-4, focando em criar o script para importar a wordList para o banco de dados
 - Finalizei o script da task-4 e retomo para a task-3, implementando os endpoints de autenticação e listagem de palavras
+
+### 16/05/2025
+
+- Continuei e finalizei a task-3, implementando todos os endpoints restantes e seus testes unitários
 -
 
 ## Checklist da entrega
@@ -190,12 +194,12 @@ Noite (+-1h 30m)
   - [x] Teste unitário
 - [x] Implementar endpoint DELETE "/entries/en/:word/unfavorite"
   - [x] Teste unitário
-- [ ] Implementar endpoint GET "/user/me"
-  - [ ] Teste unitário
-- [ ] Implementar endpoint GET "/user/me/history" (paginação)
-  - [ ] Teste unitário
-- [ ] Implementar endpoint GET "/user/me/favorites" (paginação)
-  - [ ] Teste unitário
+- [x] Implementar endpoint GET "/user/me"
+  - [x] Teste unitário
+- [x] Implementar endpoint GET "/user/me/history" (paginação)
+  - [x] Teste unitário
+- [x] Implementar endpoint GET "/user/me/favorites" (paginação)
+  - [x] Teste unitário
 
 ### TASK-4: Melhorias do backend
 
@@ -203,7 +207,7 @@ Noite (+-1h 30m)
 - [ ] Implementar cache de requisições à Free Dictionary API (Redis/MongoDB)
 - [ ] Adicionar headers x-cache e x-response-time nas respostas
 - [ ] Implementar paginação por cursores (diferencial)
-- [ ] Escrever testes unitários para todos endpoints
+- [x] Escrever testes unitários para todos endpoints
 - [ ] Documentar API com OpenAPI 3.0 (Swagger)
 - [ ] Dockerizar backend
 - [ ] Preparar backend para deploy
