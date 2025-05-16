@@ -173,10 +173,10 @@ Noite (+-1h 30m)
 
 ### TASK-3: Endpoints
 
-- [ ] Implementar endpoint GET "/"
-  - [ ] Teste unitário
-- [ ] Implementar tratamento de erros (200, 204, 400)
-  - [ ] Teste unitário
+- [x] Implementar endpoint GET "/"
+  - [x] Teste unitário
+- [x] Implementar tratamento de erros (200, 204, 400)
+  - [x] Teste unitário
 - [ ] Implementar endpoint POST "/auth/signup"
   - [ ] Teste unitário
 - [ ] Implementar endpoint POST "/auth/signin"
