@@ -38,10 +38,10 @@ model Favorite {
 }
 
 model History {
-  ID      String   @id @default(uuid())
-  USER    User     @relation(fields: [USER_ID], references: [ID])
-  USER_ID String
-  WORD    Word     @relation(fields: [WORD_ID], references: [ID])
-  WORD_ID String
-  ADDED   DateTime @default(now())
+  ID         String   @id @default(uuid())
+  USER       User     @relation(fields: [USER_ID], references: [ID])
+  USER_ID    String
+  WORD       Word     @relation(fields: [WORD_ID], references: [ID])
+  WORD_ID    String
+  CREATED_AT DateTime @default(now())
 }

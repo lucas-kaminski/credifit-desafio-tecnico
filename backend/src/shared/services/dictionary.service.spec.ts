@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DictionaryService, DictionaryWord } from './dictionary.service';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { NotFoundException } from '@nestjs/common';
 
 jest.mock('axios');
@@ -76,9 +76,15 @@ describe('DictionaryService', () => {
     });
 
     it('should throw NotFoundException when API returns 404', async () => {
-      mockedAxios.get.mockRejectedValueOnce({
-        response: { status: 404 },
-      });
+      const error = new AxiosError(
+        'Not Found',
+        undefined,
+        undefined,
+        undefined,
+        { status: 404 } as any,
+      );
+      (error as any).response = { status: 404 };
+      mockedAxios.get.mockRejectedValueOnce(error);
 
       await expect(service.getWord('nonexistent')).rejects.toThrow(
         NotFoundException,
