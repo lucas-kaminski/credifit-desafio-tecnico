@@ -6,6 +6,7 @@ backend/.env*
 !backend/.env.template
 backend/downloads/*
 !backend/downloads/.gitkeep
+backend/dist/*
 
 frontend/.env*
 
