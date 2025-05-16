@@ -182,14 +182,14 @@ Noite (+-1h 30m)
 - [x] Implementar endpoint POST "/auth/signin"
   - [x] Teste unitário
 - [x] Implementar middleware de JWT
-- [ ] Implementar endpoint GET "/entries/en" (paginação, busca)
-  - [ ] Teste unitário
-- [ ] Implementar endpoint GET "/entries/en/:word" (registra histórico)
-  - [ ] Teste unitário
-- [ ] Implementar endpoint POST "/entries/en/:word/favorite"
-  - [ ] Teste unitário
-- [ ] Implementar endpoint DELETE "/entries/en/:word/unfavorite"
-  - [ ] Teste unitário
+- [x] Implementar endpoint GET "/entries/en" (paginação, busca)
+  - [x] Teste unitário
+- [x] Implementar endpoint GET "/entries/en/:word" (registra histórico)
+  - [x] Teste unitário
+- [x] Implementar endpoint POST "/entries/en/:word/favorite"
+  - [x] Teste unitário
+- [x] Implementar endpoint DELETE "/entries/en/:word/unfavorite"
+  - [x] Teste unitário
 - [ ] Implementar endpoint GET "/user/me"
   - [ ] Teste unitário
 - [ ] Implementar endpoint GET "/user/me/history" (paginação)
