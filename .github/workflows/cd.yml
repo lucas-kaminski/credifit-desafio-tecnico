@@ -11,16 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Add host key
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
-
       - name: Copy files to VPS
         uses: appleboy/scp-action@master
         with:
