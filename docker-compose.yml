@@ -26,6 +26,7 @@ services:
       - db
     networks:
       - app-network
+    command: sh -c "npx prisma migrate deploy && yarn start:prod"
 
   db:
     image: postgres:latest
