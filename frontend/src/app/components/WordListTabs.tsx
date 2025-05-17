@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Tabs,
   TabList,
@@ -9,6 +9,7 @@ import {
   Input,
   Flex,
   Button,
+  Spinner,
 } from '@chakra-ui/react';
 
 interface WordItem {
@@ -53,6 +54,51 @@ export function WordListTabs({
 }: WordListTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [search, setSearch] = useState(initialSearch);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const historyObserver = useRef<IntersectionObserver | null>(null);
+  const favoritesObserver = useRef<IntersectionObserver | null>(null);
+
+  const lastWordElementRef = useCallback(
+    (node: HTMLButtonElement | null) => {
+      if (loadingMore) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          onLoadMore();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loadingMore, hasMore, onLoadMore]
+  );
+
+  const lastHistoryElementRef = useCallback(
+    (node: HTMLButtonElement | null) => {
+      if (loadingMoreHistory) return;
+      if (historyObserver.current) historyObserver.current.disconnect();
+      historyObserver.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMoreHistory) {
+          onLoadMoreHistory();
+        }
+      });
+      if (node) historyObserver.current.observe(node);
+    },
+    [loadingMoreHistory, hasMoreHistory, onLoadMoreHistory]
+  );
+
+  const lastFavoriteElementRef = useCallback(
+    (node: HTMLButtonElement | null) => {
+      if (loadingMoreFavorites) return;
+      if (favoritesObserver.current) favoritesObserver.current.disconnect();
+      favoritesObserver.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMoreFavorites) {
+          onLoadMoreFavorites();
+        }
+      });
+      if (node) favoritesObserver.current.observe(node);
+    },
+    [loadingMoreFavorites, hasMoreFavorites, onLoadMoreFavorites]
+  );
 
   useEffect(() => {
     setSearch(initialSearch);
@@ -83,22 +129,16 @@ export function WordListTabs({
               variant="outline"
               colorScheme="purple"
               onClick={() => onSelectWord(word)}
+              ref={idx === words.length - 1 ? lastWordElementRef : undefined}
             >
               {word}
             </Button>
           ))}
         </Flex>
-        {hasMore && words.length > 0 && (
-          <Button
-            onClick={onLoadMore}
-            isLoading={loadingMore}
-            loadingText="Carregando..."
-            colorScheme="purple"
-            variant="ghost"
-            alignSelf="center"
-          >
-            Carregar mais
-          </Button>
+        {loadingMore && (
+          <Flex justify="center" py={4}>
+            <Spinner color="purple.500" />
+          </Flex>
         )}
       </Flex>
     </Box>
@@ -108,7 +148,8 @@ export function WordListTabs({
     items: WordItem[],
     hasMore: boolean,
     loadingMore: boolean,
-    onLoadMore: () => void
+    onLoadMore: () => void,
+    lastElementRef: (node: HTMLButtonElement | null) => void
   ) => (
     <Box>
       <Flex direction="column" gap={4}>
@@ -120,22 +161,16 @@ export function WordListTabs({
               variant="outline"
               colorScheme="purple"
               onClick={() => onSelectWord(item.word)}
+              ref={idx === items.length - 1 ? lastElementRef : undefined}
             >
               {item.word}
             </Button>
           ))}
         </Flex>
-        {hasMore && items.length > 0 && (
-          <Button
-            onClick={onLoadMore}
-            isLoading={loadingMore}
-            loadingText="Carregando..."
-            colorScheme="purple"
-            variant="ghost"
-            alignSelf="center"
-          >
-            Carregar mais
-          </Button>
+        {loadingMore && (
+          <Flex justify="center" py={4}>
+            <Spinner color="purple.500" />
+          </Flex>
         )}
       </Flex>
     </Box>
@@ -155,7 +190,8 @@ export function WordListTabs({
             history,
             hasMoreHistory,
             loadingMoreHistory,
-            onLoadMoreHistory
+            onLoadMoreHistory,
+            lastHistoryElementRef
           )}
         </TabPanel>
         <TabPanel>
@@ -163,7 +199,8 @@ export function WordListTabs({
             favorites,
             hasMoreFavorites,
             loadingMoreFavorites,
-            onLoadMoreFavorites
+            onLoadMoreFavorites,
+            lastFavoriteElementRef
           )}
         </TabPanel>
       </TabPanels>
