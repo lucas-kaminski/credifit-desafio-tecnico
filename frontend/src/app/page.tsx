@@ -368,7 +368,7 @@ export default function Home() {
       <Flex
         flex={1}
         direction={isMobile ? 'column' : 'row'}
-        overflow={{ base: 'auto', md: 'hidden' }}
+        overflow={{ base: 'auto', md: 'auto' }}
       >
         {/* Esquerda: WordCard */}
         <Box
@@ -376,7 +376,8 @@ export default function Home() {
           minW="320px"
           p={4}
           bg="white"
-          h={{ base: 'auto', md: '100%' }}
+          h={{ base: 'auto', md: 'auto' }}
+          overflow={{ base: 'auto', md: 'auto' }}
         >
           {selectedWord ? (
             loadingWord ? (
@@ -449,8 +450,8 @@ export default function Home() {
           flex={1}
           p={4}
           bg="gray.50"
-          h={{ base: 'auto', md: '100%' }}
-          overflow={{ base: 'auto', md: 'hidden' }}
+          h={{ base: 'auto', md: 'auto' }}
+          overflow={{ base: 'auto', md: 'auto' }}
         >
           <WordListTabs
             wordList={wordList}
