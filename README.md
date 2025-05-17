@@ -1,16 +1,140 @@
-# Entrega do desafio "Fullstack Challenge - Dictionary" by Coodesh
+# Wordz
+
+> This is a challenge by [Coodesh](https://coodesh.com/)
+
+Um dicionário em inglês para buscar palavras, aprender mais sobre elas e as que mais gostar, salvar como favorita!
+
+Para conhecer o projeto, acesse o site [wordz.lucas-kaminski.dev](https://wordz.lucas-kaminski.dev), faça seu cadastro e comece a procurar palavras!
+
+Feito para como entrega para o desafio técnico da [Coodesh](https://coodesh.com/), para mais informações, acesse o arquivo [original-readme.md](original-readme.md) e saiba a definição inicial e detalhes sobre a proposta.
+
+## Sumário
+
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Instalação e uso](#instalação-e-uso)
+- [Log de desenvolvimento](#log-de-desenvolvimento)
+- [Checklist da entrega](#checklist-da-entrega)
+- [Backlog](#backlog)
+
+## Tecnologias utilizadas
+
+Tratando de um projeto end to end, optou-se por utilizar tecnologias que tinha um match com a proposta do desafio, além de ser uma lista de tecnologias que eu utilizo no meu dia a dia em outros projetos.
+
+### Infraestrutura do projeto
+
+- Monorepo com backend e frontend;
+- Docker orquestrado pelo docker compose para containerização dos serviços;
+- Workflows de Continuous Integration com Github Actions;
+- Workflow de Continuous Deployment em VPS pessoal com Nginx previamente instalado e configurado como reverse proxy junto com a ferramente Certbot para administração de certificados SSL.
+
+### Banco de dados
+
+- PostgreSQL para armazenamento primário dos dados;
+- Redis para cache das requisições.
+
+### Frontend
+
+- Typescript;
+- Next.js;
+- React;
+- Chakra UI.
+
+### Backend
+
+- TypeScript;
+- Node.js;
+- NestJS;
+- Prisma ORM;
+- Axios;
+- JWT + Bcrypt + Passport;
+- Class-transformer + class-validator;
+- Jest.
+
+### Qualidade de código
+
+- ESLint;
+- Prettier;
+- Husky.
+
+## Instalação e inicialização do projeto
+
+### Pré-requisitos
+
+Antes de começar, é necessário ter instalado e configurado na sua máquina:
+
+- [Git](https://git-scm.com/downloads);
+- [Node.js LTS](https://nodejs.org/en/about/previous-releases);
+- [Yarn](https://yarnpkg.com/getting-started);
+- [Docker](https://hub.docker.com/welcome);
+
+### Configuração do projeto
+
+Os comandos abaixo são instruções para execução em ambiente Linux, caso queira executar em outro sistema operacional, algumas configurações podem variar.
+
+1. Clone o repositório
+
+```sh
+git clone https://github.com/lucas-kaminski/credifit-desafio-tecnico.git
+```
+
+2. Instale as dependências do backend
+
+```sh
+cd backend
+yarn install
+```
+
+3. Copie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente
+
+4. Instancie o banco de dados
+
+```sh
+cd credifit-desafio-tecnico
+docker compose up -d db
+```
+
+5. Alimente o banco de dados com a wordList
+
+```sh
+cd backend
+yarn seed:database
+```
+
+6. Inicie o servidor
+
+```sh
+cd backend
+yarn start:dev
+```
+
+7. Instale as dependências do frontend
+
+```sh
+cd frontend
+yarn install
+```
+
+8. Inicie o servidor
+
+```sh
+cd frontend
+yarn dev
+```
+
+9. Acesse a aplicação no navegador no endereço `http://localhost:3000`
+
+10. Faça seu cadastro e comece a usar!
 
 ## Log de desenvolvimento
 
-### 12/05/2025
+Aqui está um relatório de todo o processo de desenvolvimento do projeto, desde a abertura do desafio até a entrega final, com as tarefas e decisões técnicas que foram tomadas durante a execução do desafio.
 
-Tarde (+-15m)
+Toda vez que é citado uma task, é referente ao [backlog](#backlog) e a sua definição.
+
+### 12/05/2025
 
 - Fiz a abertura do desafio pelo link recebido no e-mail. Fiz a leitura do desafio, enviei um e-mail para o recrutador perguntando se estaria em tempo hábil para realizar o desafio. Recebo o retorno positivo e organizo-me para começar o desafio a noite.
 - Faço o fork do repositório, configuro como público e clono para minha máquina.
-
-Noite (+-1h 30m)
-
 - Reli o README.md e durante o processo fiz o [checklist de entrega](#checklist-da-entrega)
 - Iniciei o [dev log](#log-de-desenvolvimento)
 - Iniciei o [backlog](#backlog)
@@ -19,21 +143,36 @@ Noite (+-1h 30m)
 
 ### 15/05/2025
 
-- Finalizei a task-0, completando backlog
+- Finalizei a task-0 anteriormente definida, que seria a definição do backlog
 - Iniciei e finalizei a task-1, configurando o projeto monorepo no geral
 - Iniciei a task-2, configurando o projeto backend e suas ferramentas, executei até a definição completa do banco de dados e sua primeira migração
-- Com o banco estruturado, iniciei a task-4, focando em criar o script para importar a wordList para o banco de dados
-- Finalizei o script da task-4 e retomo para a task-3, implementando os endpoints de autenticação e listagem de palavras
+- Com o banco estruturado, iniciei a task-4, focando em criar o script para importar a wordList para o banco de dados, gerando para mim uma massa de dados para trabalhar conforme fosse implementando os endpoints
+- Finalizei o script da task-4 e retomo para a task-3, implementando os endpoints de autenticação e listagem de palavras já cadastradas no banco de dados
 
 ### 16/05/2025
 
-- Continuei e finalizei a task-3, implementando todos os endpoints restantes e seus testes unitários
-- Dockerizei o backend pela task-4 e validei toda configuração do projeto criado até aqui
-- Finalizei a task-5, configurando o projeto frontend e suas ferramentas
-- Finalizei a task-6, implementando todas as funcionalidades do frontend
--
+- Continuei e finalizei a task-3, implementando todos os endpoints restantes e seus testes unitários, toda a lógica de negócio foi implementada junto com seus testes unitários, garantindo que o código está funcionando conforme o esperado e, futuras mudanças que viessem a ser necessárias, não quebrariam o código de forma inesperada
+- Dockerizei o backend pela task-4 e validei toda configuração do projeto criado até aqui, rodando tudo localmente e tendo certeza de que tudo está funcionando conforme o esperado
+- Iniciei e finalizei a task-5, configurando o projeto frontend e suas ferramentas, configuração de variáveis de ambiente, configuração de ESLint, Prettier e Husky
+- Iniciei e finalizei a task-6, implementando quase todas as funcionalidades do frontend e deixando a maioria das telas funcionando conforme o esperado, faltando apenas implementações secundárias, o core do projeto já está funcional a essa parte, permitindo que eu possa testar em ambiente de produção
+- Estruturei toda configuração e adaptei minha VPS pessoal para o deploy do projeto, criando as urls [wordz.lucas-kaminski.dev](wordz.lucas-kaminski.dev) para o deploy do frontend e [backend-wordz.lucas-kaminski.dev](backend-wordz.lucas-kaminski.dev) para o deploy do backend
+- Finalizei a task-7, realizando o deploy do projeto no servidor, configurando o nginx como reverse proxy e habilitando o SSL com certbot
+- Retomei algumas melhorias que passaram na TASK-6, como implementação do scroll infinito e adição de um parâmetro de busca na URL.
+- Finalizei a task-8, atualizando o README.md com as informações de ENTREGA do projeto. A esta altura, o projeto está funcionando conforme o esperado e está apto para ser entregue. Porém, ainda faltam algumas melhorias secundárias apontadas que não foram implementadas, sendo elas:
+  - Backend:
+    - Documentação da API com OpenAPI 3.0
+    - Cache de requisições à Free Dictionary API
+    - Cache de requisições entre o backend e o frontend
+    - Paginação por cursores com mudança da estrutura de retorno para o padrão de cursores
+  - Frontend:
+    - SSR
+    - PWA
+    - Unit ou E2E tests
+- Como falta pouco tempo para a entrega (menos de 12 horas), é necessário eu decidir o que vou priorizar para entrega e o que vou deixar como não priorizado.
 
 ## Checklist da entrega
+
+O checklist abaixo é uma lista de todos os itens que abstrai como demanda de desenvolvimento a partir da definição original do desafio. Me serviu como base para definir o backlog e as tasks, além de ser uma lista de reverificação durante o desenvolvimento para garantir que tudo que foi requisitado, será implementado. Conforme o desenvolvimento, eu vou marcando os itens como concluídos e mantendo o checklist atualizado.
 
 ### Antes de começar
 
@@ -62,7 +201,7 @@ Noite (+-1h 30m)
 
 - [x] Separar código backend do frontend
 - [x] Clean code
-- [ ] Validação de chamadas assíncronas para evitar tratamento
+- [x] Validação de chamadas assíncronas para evitar tratamento
 
 ### Backend
 
@@ -89,7 +228,7 @@ Noite (+-1h 30m)
 - [ ] Documentação da API no OpenAPI 3.0
 - [x] Unit tests para os endpoints da API
 - [x] Docker no projeto
-- [ ] Deploy em algum servidor
+- [x] Deploy em algum servidor
 - [ ] Paginação por cursores com retorno padrão
 - [ ] Cache o resultado das requisições com headers específicos na resposta
 
@@ -97,7 +236,7 @@ Noite (+-1h 30m)
 
 - [x] Atender os casos de uso
   - [x] Capacidade de login
-  - [ ] Lista de palavras com rolagem infinita
+  - [x] Lista de palavras com rolagem infinita
   - [x] Visualizar uma palavra, significado e fonética
   - [x] Salvar como favorito
   - [x] Remover palavra como favorito
@@ -105,20 +244,26 @@ Noite (+-1h 30m)
 - [x] Seguir o wireframe definido
 - [ ] Unit ou E2E tests
 - [x] Docker
-- [ ] URL com params de busca
+- [x] URL com params de busca
 - [ ] SSR
 - [ ] PWA
 
 ### Entrega final
 
-- [ ] Título do projeto
-- [ ] Descrição em frase
-- [ ] Lista de ferramentas utilizadas
-- [ ] Como instalar e usar o projeto
-- [ ] Não esquecer do .gitignore
-- [ ] Colocar referência do challenge
+- [x] Título do projeto
+- [x] Descrição em frase
+- [x] Lista de ferramentas utilizadas
+- [x] Como instalar e usar o projeto
+- [x] Não esquecer do .gitignore
+- [x] Colocar referência do challenge
 
 ## Backlog
+
+Esse é o backlog do projeto, onde eu defini as tasks e o que foi desenvolvido.
+
+Optei pela nomenclatura TASK-X para as tasks, onde X é o número da task na ordem da esteira de desenvolvimento, sendo uma alusão aos diversos sistemas de gerenciamento de projeto que conheço.
+
+Normalmente é utilizado o identificador da TASK como referência para o desenvolvimento, sendo o nome da branch a ser desenvolvida o mesmo nome da task, realizando PRs para a branch `develop` e, após a aprovação do PR, realizando o merge da branch `develop` para a branch `main` conforme o patch de atualização do projeto fosse liberado.
 
 ### TASK-0: Entendimento do desafio
 
@@ -136,13 +281,12 @@ Noite (+-1h 30m)
   - Escolhas INICIAIS para o desafio
     - Para o frontend:
       - TypeScript, React com NextJS para PWA/SSR
-      - As outras instruções iniciais eu prefiro
-        adaptar conforme desenvolvimento do desafio
+      - As outras instruções iniciais eu prefiro adaptar conforme desenvolvimento do desafio
     - Para o backend:
       - TypeScript, NodeJS com NestJS para API Rest
     - Para o banco de dados
       - SQL, PostgreSQL com Prisma ORM
-      - NoSQL, MongoDB com Mongoose
+      - NoSQL, Redis com Redis-OM
     - Reforçando que uma diretriz inicial, pode ser adaptada conforme o desenvolvimento do desafio
 - [x] Oficializar um padrão de documentação "Dev Log" para a entrega
 - [x] Iniciar o git workflow
@@ -224,8 +368,8 @@ Noite (+-1h 30m)
 - [x] Implementar design mobile first
 - [x] Implementar estilização com CSS Flexbox e Grid
 - [x] Implementar usabilidade e acessibilidade
-- [ ] Implementar URL com parâmetros de busca
-- [ ] Implementar SSR (Server Side Rendering)
+- [x] Implementar URL com parâmetros de busca
+- [ ] Implementar SSR
 - [ ] Implementar PWA
 - [ ] Escrever testes unitários ou E2E
 - [x] Dockerizar frontend
@@ -239,7 +383,7 @@ Noite (+-1h 30m)
 
 ### TASK-8: Documentação e Entrega
 
-- [ ] Atualizar README com título, descrição, tecnologias, instruções de uso
-- [ ] Adicionar referência ao challenge by Coodesh
-- [ ] Documentar decisões técnicas e critérios de qualidade
-- [ ] Checklist final de entrega
+- [x] Atualizar README com título, descrição, tecnologias, instruções de uso
+- [x] Adicionar referência ao challenge by Coodesh
+- [x] Documentar decisões técnicas e critérios de qualidade
+- [x] Checklist final de entrega
