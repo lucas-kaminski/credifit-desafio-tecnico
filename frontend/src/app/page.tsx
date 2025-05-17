@@ -7,6 +7,7 @@ import {
   Spinner,
   Text,
   Button,
+  HStack,
 } from '@chakra-ui/react';
 import { WordCard } from './components/WordCard';
 import { WordListTabs } from './components/WordListTabs';
@@ -46,6 +47,11 @@ export default function Home() {
   const [loadingMoreHistory, setLoadingMoreHistory] = useState(false);
   const [loadingMoreFavorites, setLoadingMoreFavorites] = useState(false);
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const [user, setUser] = useState<{
+    NAME: string;
+    ID: string;
+    EMAIL: string;
+  } | null>(null);
 
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -64,24 +70,32 @@ export default function Home() {
     async function fetchData() {
       setLoading(true);
       try {
-        const [wordsRes, historyRes, favoritesRes] = await Promise.all([
-          fetchWithAuth(API_ENDPOINTS.entries.list),
-          fetchWithAuth(API_ENDPOINTS.user.history),
-          fetchWithAuth(API_ENDPOINTS.user.favorites),
-        ]);
+        const [wordsRes, historyRes, favoritesRes, profileRes] =
+          await Promise.all([
+            fetchWithAuth(API_ENDPOINTS.entries.list),
+            fetchWithAuth(API_ENDPOINTS.user.history),
+            fetchWithAuth(API_ENDPOINTS.user.favorites),
+            fetchWithAuth(API_ENDPOINTS.user.profile),
+          ]);
         const wordsRaw = await wordsRes.json();
         const historyData = await historyRes.json();
         const favoritesData = await favoritesRes.json();
+        const profileData = await profileRes.json();
+
+        console.log('Profile data:', profileData);
+
         setWordList(wordsRaw.results || []);
         setHasMore(wordsRaw.hasNext || false);
         setHistory(historyData.results || []);
         setFavorites(favoritesData.results || []);
+        setUser(profileData);
         setSelectedWord(null);
       } catch (error) {
         console.error('Error fetching data:', error);
         setWordList([]);
         setHistory([]);
         setFavorites([]);
+        setUser(null);
         setSelectedWord(null);
       } finally {
         setLoading(false);
@@ -324,23 +338,94 @@ export default function Home() {
     <Flex
       h={{ base: 'auto', md: '100vh' }}
       minH={{ base: '100vh', md: '100vh' }}
-      direction={isMobile ? 'column' : 'row'}
+      direction="column"
       overflow={{ base: 'auto', md: 'hidden' }}
     >
-      {/* Esquerda: WordCard */}
-      <Box
-        w={{ base: '100%', md: '40%' }}
-        minW="320px"
+      <HStack
+        w="100%"
         p={4}
-        bg="white"
-        h={{ base: 'auto', md: '100%' }}
+        bg="purple.700"
+        color="white"
+        justify="space-between"
+        align="center"
       >
-        {selectedWord ? (
-          loadingWord ? (
-            <Flex align="center" justify="center" h="100%">
-              <Spinner size="lg" color="purple.500" />
-            </Flex>
-          ) : error ? (
+        <Text fontSize="lg" fontWeight="bold">
+          {user?.NAME ? `Olá, ${user.NAME}` : 'Olá'}
+        </Text>
+        <Button
+          variant="ghost"
+          color="white"
+          _hover={{ bg: 'purple.600' }}
+          onClick={() => {
+            document.cookie =
+              'auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+            window.location.href = '/login';
+          }}
+        >
+          Sair
+        </Button>
+      </HStack>
+      <Flex
+        flex={1}
+        direction={isMobile ? 'column' : 'row'}
+        overflow={{ base: 'auto', md: 'hidden' }}
+      >
+        {/* Esquerda: WordCard */}
+        <Box
+          w={{ base: '100%', md: '40%' }}
+          minW="320px"
+          p={4}
+          bg="white"
+          h={{ base: 'auto', md: '100%' }}
+        >
+          {selectedWord ? (
+            loadingWord ? (
+              <Flex align="center" justify="center" h="100%">
+                <Spinner size="lg" color="purple.500" />
+              </Flex>
+            ) : error ? (
+              <Flex
+                direction="column"
+                align="center"
+                justify="center"
+                h="100%"
+                textAlign="center"
+                p={4}
+              >
+                <Text color="red.500" fontSize="lg" mb={4}>
+                  {error}
+                </Text>
+                <Button colorScheme="purple" onClick={handleCloseWord}>
+                  Voltar
+                </Button>
+              </Flex>
+            ) : (
+              <WordCard
+                word={wordDetails?.word || ''}
+                phonetic={wordDetails?.phonetic}
+                meanings={wordDetails?.meanings}
+                audioUrls={wordDetails?.audioUrls}
+                synonyms={wordDetails?.synonyms}
+                antonyms={wordDetails?.antonyms}
+                sourceUrls={wordDetails?.sourceUrls}
+                onPrev={() => {
+                  const idx = wordList.indexOf(selectedWord);
+                  if (idx > 0) handleSelectWord(wordList[idx - 1]);
+                }}
+                onNext={() => {
+                  const idx = wordList.indexOf(selectedWord);
+                  if (idx < wordList.length - 1)
+                    handleSelectWord(wordList[idx + 1]);
+                }}
+                onSelectSynonym={handleSelectSynonym}
+                onSelectAntonym={handleSelectAntonym}
+                isFavorite={favorites.some((f) => f.word === wordDetails?.word)}
+                onToggleFavorite={() =>
+                  wordDetails?.word && handleToggleFavorite(wordDetails.word)
+                }
+              />
+            )
+          ) : (
             <Flex
               direction="column"
               align="center"
@@ -348,84 +433,43 @@ export default function Home() {
               h="100%"
               textAlign="center"
               p={4}
+              gap={4}
             >
-              <Text color="red.500" fontSize="lg" mb={4}>
-                {error}
+              <Text fontSize="xl" color="purple.700" fontWeight="bold">
+                Bem-vindo ao Wordz!
               </Text>
-              <Button colorScheme="purple" onClick={handleCloseWord}>
-                Voltar
-              </Button>
+              <Text color="gray.600">
+                Selecione uma palavra da lista ou use a busca para começar.
+              </Text>
             </Flex>
-          ) : (
-            <WordCard
-              word={wordDetails?.word || ''}
-              phonetic={wordDetails?.phonetic}
-              meanings={wordDetails?.meanings}
-              audioUrls={wordDetails?.audioUrls}
-              synonyms={wordDetails?.synonyms}
-              antonyms={wordDetails?.antonyms}
-              sourceUrls={wordDetails?.sourceUrls}
-              onPrev={() => {
-                const idx = wordList.indexOf(selectedWord);
-                if (idx > 0) handleSelectWord(wordList[idx - 1]);
-              }}
-              onNext={() => {
-                const idx = wordList.indexOf(selectedWord);
-                if (idx < wordList.length - 1)
-                  handleSelectWord(wordList[idx + 1]);
-              }}
-              onSelectSynonym={handleSelectSynonym}
-              onSelectAntonym={handleSelectAntonym}
-              isFavorite={favorites.some((f) => f.word === wordDetails?.word)}
-              onToggleFavorite={() =>
-                wordDetails?.word && handleToggleFavorite(wordDetails.word)
-              }
-            />
-          )
-        ) : (
-          <Flex
-            direction="column"
-            align="center"
-            justify="center"
-            h="100%"
-            textAlign="center"
-            p={4}
-            gap={4}
-          >
-            <Text fontSize="xl" color="purple.700" fontWeight="bold">
-              Bem-vindo ao Wordz!
-            </Text>
-            <Text color="gray.600">
-              Selecione uma palavra da lista ou use a busca para começar.
-            </Text>
-          </Flex>
-        )}
-      </Box>
-      {/* Direita: Abas */}
-      <Box
-        flex={1}
-        p={4}
-        bg="gray.50"
-        h={{ base: 'auto', md: '100%' }}
-        overflow={{ base: 'auto', md: 'hidden' }}
-      >
-        <WordListTabs
-          wordList={wordList}
-          history={history}
-          favorites={favorites}
-          onSelectWord={handleSelectWord}
-          onSearchWord={handleSearchWord}
-          onLoadMore={handleLoadMore}
-          hasMore={hasMore}
-          loadingMore={loadingMore}
-          onLoadMoreHistory={handleLoadMoreHistory}
-          onLoadMoreFavorites={handleLoadMoreFavorites}
-          hasMoreHistory={hasMoreHistory}
-          hasMoreFavorites={hasMoreFavorites}
-          loadingMoreHistory={loadingMoreHistory}
-          loadingMoreFavorites={loadingMoreFavorites}
-        />
-      </Box>
+          )}
+        </Box>
+        {/* Direita: Abas */}
+        <Box
+          flex={1}
+          p={4}
+          bg="gray.50"
+          h={{ base: 'auto', md: '100%' }}
+          overflow={{ base: 'auto', md: 'hidden' }}
+        >
+          <WordListTabs
+            wordList={wordList}
+            history={history}
+            favorites={favorites}
+            onSelectWord={handleSelectWord}
+            onSearchWord={handleSearchWord}
+            onLoadMore={handleLoadMore}
+            hasMore={hasMore}
+            loadingMore={loadingMore}
+            onLoadMoreHistory={handleLoadMoreHistory}
+            onLoadMoreFavorites={handleLoadMoreFavorites}
+            hasMoreHistory={hasMoreHistory}
+            hasMoreFavorites={hasMoreFavorites}
+            loadingMoreHistory={loadingMoreHistory}
+            loadingMoreFavorites={loadingMoreFavorites}
+          />
+        </Box>
+      </Flex>
       {isMobile && selectedWord && (
         <Box
           pos="fixed"
