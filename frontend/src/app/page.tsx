@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import {
   Flex,
   Box,
@@ -15,7 +15,7 @@ import { API_ENDPOINTS } from '@/config/api';
 import { fetchWithAuth } from '@/utils/api';
 import { useSearchParams } from 'next/navigation';
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const [wordList, setWordList] = useState<string[]>([]);
   const [history, setHistory] = useState<
@@ -555,5 +555,13 @@ export default function Home() {
         </Box>
       )}
     </Flex>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <HomeContent />
+    </Suspense>
   );
 }
