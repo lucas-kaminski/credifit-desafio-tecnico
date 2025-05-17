@@ -35,8 +35,13 @@ export default function LoginPage() {
         return;
       }
 
+      // Extract the token part (remove 'Bearer ' prefix if present)
+      const token = data.token.startsWith('Bearer ')
+        ? data.token.slice(7)
+        : data.token;
+
       // Set the auth token cookie with proper attributes
-      document.cookie = `auth_token=${data.token}; path=/; secure; samesite=strict`;
+      document.cookie = `auth_token=${token}; path=/; secure; samesite=strict`;
 
       // Redirect to home page
       router.push('/');
