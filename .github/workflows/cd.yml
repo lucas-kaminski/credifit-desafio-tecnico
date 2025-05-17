@@ -31,4 +31,6 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd ~/personal/wordz
+            cp .env_backend backend/.env
+            cp .env_frontend frontend/.env
             docker compose up -d --build

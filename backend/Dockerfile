@@ -9,9 +9,9 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn build
-
 RUN npx prisma generate
+
+RUN yarn build
 
 RUN ls -la dist/ && ls -la dist/src/
 
