@@ -52,7 +52,6 @@ export function WordListTabs({
   loadingMoreFavorites,
   initialSearch = '',
 }: WordListTabsProps) {
-  const [activeTab, setActiveTab] = useState(0);
   const [search, setSearch] = useState(initialSearch);
   const observer = useRef<IntersectionObserver | null>(null);
   const historyObserver = useRef<IntersectionObserver | null>(null);
