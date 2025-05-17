@@ -206,7 +206,7 @@ Noite (+-1h 30m)
 - [x] Escrever testes unitários para todos endpoints
 - [ ] Documentar API com OpenAPI 3.0
 - [x] Dockerizar backend
-- [ ] Preparar backend para deploy
+- [x] Preparar backend para deploy
 
 ### TASK-5: Configuração do frontend
 
@@ -229,13 +229,13 @@ Noite (+-1h 30m)
 - [ ] Implementar PWA
 - [ ] Escrever testes unitários ou E2E
 - [x] Dockerizar frontend
-- [ ] Preparar frontend para deploy
+- [x] Preparar frontend para deploy
 
 ### TASK-7: DevOps
 
 - [x] Criar arquivos Dockerfile e docker-compose.yml
-- [ ] Realizar deploy do backend
-- [ ] Realizar deploy do frontend
+- [x] Realizar deploy do backend
+- [x] Realizar deploy do frontend
 
 ### TASK-8: Documentação e Entrega
 
