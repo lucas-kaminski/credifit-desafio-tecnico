@@ -1,4 +1,18 @@
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
   backend:
     build:
       context: ./backend
@@ -13,6 +27,8 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    networks:
+      - app-network
 
   db:
     image: postgres:latest
@@ -23,6 +39,12 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   pgdata:
