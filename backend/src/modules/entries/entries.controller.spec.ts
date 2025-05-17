@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EntriesController } from './entries.controller';
 import { EntriesService } from './entries.service';
 import { DictionaryWord } from '../../shared/services/dictionary.service';
+import { Request } from 'express';
 
 describe('EntriesController', () => {
   let controller: EntriesController;
-  let service: EntriesService;
 
   const mockEntriesService = {
     getEntries: jest.fn(),
@@ -19,7 +19,7 @@ describe('EntriesController', () => {
       id: 'user-id',
       email: 'test@example.com',
     },
-  };
+  } as Request & { user: { id: string; email: string } };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -33,7 +33,6 @@ describe('EntriesController', () => {
     }).compile();
 
     controller = module.get<EntriesController>(EntriesController);
-    service = module.get<EntriesService>(EntriesService);
   });
 
   afterEach(() => {
@@ -79,10 +78,7 @@ describe('EntriesController', () => {
     it('should return word details', async () => {
       mockEntriesService.getWordDetails.mockResolvedValueOnce(mockWordData);
 
-      const result = await controller.getWordDetails(
-        'test',
-        mockRequest as any,
-      );
+      const result = await controller.getWordDetails('test', mockRequest);
 
       expect(result).toEqual(mockWordData);
       expect(mockEntriesService.getWordDetails).toHaveBeenCalledWith(
@@ -96,10 +92,7 @@ describe('EntriesController', () => {
     it('should add word to favorites', async () => {
       mockEntriesService.addToFavorites.mockResolvedValueOnce(undefined);
 
-      const result = await controller.addToFavorites(
-        'test',
-        mockRequest as any,
-      );
+      const result = await controller.addToFavorites('test', mockRequest);
 
       expect(result).toEqual({ message: 'Word added to favorites' });
       expect(mockEntriesService.addToFavorites).toHaveBeenCalledWith(
@@ -113,10 +106,7 @@ describe('EntriesController', () => {
     it('should remove word from favorites', async () => {
       mockEntriesService.removeFromFavorites.mockResolvedValueOnce(undefined);
 
-      const result = await controller.removeFromFavorites(
-        'test',
-        mockRequest as any,
-      );
+      const result = await controller.removeFromFavorites('test', mockRequest);
 
       expect(result).toEqual({ message: 'Word removed from favorites' });
       expect(mockEntriesService.removeFromFavorites).toHaveBeenCalledWith(

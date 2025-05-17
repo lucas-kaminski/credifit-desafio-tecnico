@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DictionaryService, DictionaryWord } from './dictionary.service';
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { NotFoundException } from '@nestjs/common';
 
 jest.mock('axios');
@@ -62,7 +62,8 @@ describe('DictionaryService', () => {
       const result = await service.getWord('test');
 
       expect(result).toEqual(mockWord);
-      expect(mockedAxios.get).toHaveBeenCalledWith(
+      const getSpy = jest.spyOn(mockedAxios, 'get');
+      expect(getSpy).toHaveBeenCalledWith(
         'https://api.dictionaryapi.dev/api/v2/entries/en/test',
       );
     });
@@ -81,9 +82,14 @@ describe('DictionaryService', () => {
         undefined,
         undefined,
         undefined,
-        { status: 404 } as any,
+        {
+          status: 404,
+          statusText: 'Not Found',
+          headers: {},
+          config: {} as InternalAxiosRequestConfig,
+          data: {},
+        },
       );
-      (error as any).response = { status: 404 };
       mockedAxios.get.mockRejectedValueOnce(error);
 
       await expect(service.getWord('nonexistent')).rejects.toThrow(

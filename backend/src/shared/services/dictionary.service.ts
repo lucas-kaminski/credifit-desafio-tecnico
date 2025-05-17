@@ -39,6 +39,9 @@ export class DictionaryService {
       const response = await axios.get<DictionaryWord[]>(
         `${this.API_URL}/${encodeURIComponent(word)}`,
       );
+      if (!response.data.length) {
+        throw new NotFoundException(`Word "${word}" not found at API`);
+      }
       return response.data[0];
     } catch (error) {
       if (error instanceof AxiosError && error.response?.status === 404) {

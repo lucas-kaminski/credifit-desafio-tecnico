@@ -1,11 +1,36 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, ArgumentsHost } from '@nestjs/common';
 import { HttpExceptionFilter } from './http-exception.filter';
 import { BadRequestException } from '../exceptions';
+import { Request, Response } from 'express';
+
+interface ErrorResponse {
+  statusCode: number;
+  timestamp: string;
+  path: string;
+  method: string;
+  message: string;
+}
+
+type MockResponse = {
+  status: jest.Mock;
+  json: jest.Mock;
+} & Partial<Response>;
+
+type MockRequest = {
+  url: string;
+  method: string;
+} & Partial<Request>;
+
+const createTimestampMatcher = () => {
+  return expect.stringMatching(
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/,
+  ) as unknown as string;
+};
 
 describe('HttpExceptionFilter', () => {
   let filter: HttpExceptionFilter;
-  let mockResponse: any;
-  let mockRequest: any;
+  let mockResponse: MockResponse;
+  let mockRequest: MockRequest;
 
   beforeEach(() => {
     filter = new HttpExceptionFilter();
@@ -26,18 +51,18 @@ describe('HttpExceptionFilter', () => {
         getResponse: () => mockResponse,
         getRequest: () => mockRequest,
       }),
-    };
+    } as ArgumentsHost;
 
-    filter.catch(exception, mockHost as any);
+    filter.catch(exception, mockHost);
 
     expect(mockResponse.status).toHaveBeenCalledWith(HttpStatus.BAD_REQUEST);
     expect(mockResponse.json).toHaveBeenCalledWith({
       statusCode: HttpStatus.BAD_REQUEST,
-      timestamp: expect.any(String),
+      timestamp: createTimestampMatcher(),
       path: '/test',
       method: 'GET',
       message: 'Test error',
-    });
+    } as ErrorResponse);
   });
 
   it('should handle standard HttpExceptions', () => {
@@ -50,17 +75,17 @@ describe('HttpExceptionFilter', () => {
         getResponse: () => mockResponse,
         getRequest: () => mockRequest,
       }),
-    };
+    } as ArgumentsHost;
 
-    filter.catch(exception, mockHost as any);
+    filter.catch(exception, mockHost);
 
     expect(mockResponse.status).toHaveBeenCalledWith(HttpStatus.BAD_REQUEST);
     expect(mockResponse.json).toHaveBeenCalledWith({
       statusCode: HttpStatus.BAD_REQUEST,
-      timestamp: expect.any(String),
+      timestamp: createTimestampMatcher(),
       path: '/test',
       method: 'GET',
       message: 'Standard error',
-    });
+    } as ErrorResponse);
   });
 });

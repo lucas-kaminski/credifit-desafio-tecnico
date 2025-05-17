@@ -15,7 +15,7 @@ export class EntriesService {
   ) {}
 
   async getEntries(query: GetEntriesDto) {
-    const { search, page = 1, limit = 10 } = query;
+    const { search, page = 1, limit = 50 } = query;
     const skip = (page - 1) * limit;
 
     const where: Prisma.WordWhereInput = search
