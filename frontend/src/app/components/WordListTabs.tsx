@@ -9,7 +9,6 @@ import {
   Input,
   Flex,
   Button,
-  Spinner,
 } from '@chakra-ui/react';
 
 interface WordItem {
