@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Tabs,
   TabList,
@@ -31,6 +31,7 @@ interface WordListTabsProps {
   hasMoreFavorites: boolean;
   loadingMoreHistory: boolean;
   loadingMoreFavorites: boolean;
+  initialSearch?: string;
 }
 
 export function WordListTabs({
@@ -48,8 +49,14 @@ export function WordListTabs({
   hasMoreFavorites,
   loadingMoreHistory,
   loadingMoreFavorites,
+  initialSearch = '',
 }: WordListTabsProps) {
-  const [search, setSearch] = useState('');
+  const [activeTab, setActiveTab] = useState(0);
+  const [search, setSearch] = useState(initialSearch);
+
+  useEffect(() => {
+    setSearch(initialSearch);
+  }, [initialSearch]);
 
   // Filtro só para a aba Word List
   const filteredWords = wordList.filter((w) =>

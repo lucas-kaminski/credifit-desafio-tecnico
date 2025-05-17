@@ -13,8 +13,10 @@ import { WordCard } from './components/WordCard';
 import { WordListTabs } from './components/WordListTabs';
 import { API_ENDPOINTS } from '@/config/api';
 import { fetchWithAuth } from '@/utils/api';
+import { useSearchParams } from 'next/navigation';
 
 export default function Home() {
+  const searchParams = useSearchParams();
   const [wordList, setWordList] = useState<string[]>([]);
   const [history, setHistory] = useState<
     Array<{ word: string; created_at: string }>
@@ -89,7 +91,26 @@ export default function Home() {
         setHistory(historyData.results || []);
         setFavorites(favoritesData.results || []);
         setUser(profileData);
-        setSelectedWord(null);
+
+        // Check for word parameter in URL
+        const wordFromUrl = searchParams.get('word');
+        if (wordFromUrl) {
+          setSelectedWord(wordFromUrl);
+          setCurrentSearch(wordFromUrl);
+          // Perform initial search for related words
+          const searchRes = await fetchWithAuth(
+            `${API_ENDPOINTS.entries.list}?search=${encodeURIComponent(
+              wordFromUrl
+            )}&page=1`
+          );
+          const searchData = await searchRes.json();
+          setWordList(
+            Array.isArray(searchData.results) ? searchData.results : []
+          );
+          setHasMore(searchData.hasNext || false);
+        } else {
+          setSelectedWord(null);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
         setWordList([]);
@@ -102,7 +123,7 @@ export default function Home() {
       }
     }
     fetchData();
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     if (!selectedWord) return;
@@ -468,6 +489,7 @@ export default function Home() {
             hasMoreFavorites={hasMoreFavorites}
             loadingMoreHistory={loadingMoreHistory}
             loadingMoreFavorites={loadingMoreFavorites}
+            initialSearch={currentSearch}
           />
         </Box>
       </Flex>
