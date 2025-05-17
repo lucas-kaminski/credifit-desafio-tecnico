@@ -51,7 +51,6 @@ export class EntriesService {
   async getWordDetails(word: string, userId: string): Promise<DictionaryWord> {
     const wordData = await this.dictionaryService.getWord(word);
 
-    // Record in history
     await this.prisma.history.create({
       data: {
         USER_ID: userId,

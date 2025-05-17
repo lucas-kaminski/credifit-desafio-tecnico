@@ -24,7 +24,7 @@ export class UserService {
     return user;
   }
 
-  async getHistory(userId: string, page = 1, limit = 10) {
+  async getHistory(userId: string, page = 1, limit = 50) {
     const skip = (page - 1) * limit;
 
     const [history, total] = await Promise.all([
@@ -64,7 +64,7 @@ export class UserService {
     };
   }
 
-  async getFavorites(userId: string, page = 1, limit = 10) {
+  async getFavorites(userId: string, page = 1, limit = 50) {
     const skip = (page - 1) * limit;
 
     const [favorites, total] = await Promise.all([

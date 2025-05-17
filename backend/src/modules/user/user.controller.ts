@@ -27,7 +27,7 @@ export class UserController {
     @Query('limit') limit?: string,
   ) {
     const pageNum = page ? parseInt(page, 10) : 1;
-    const limitNum = limit ? parseInt(limit, 10) : 10;
+    const limitNum = limit ? parseInt(limit, 10) : 50;
     return this.userService.getHistory(req.user.id, pageNum, limitNum);
   }
 
@@ -38,7 +38,7 @@ export class UserController {
     @Query('limit') limit?: string,
   ) {
     const pageNum = page ? parseInt(page, 10) : 1;
-    const limitNum = limit ? parseInt(limit, 10) : 10;
+    const limitNum = limit ? parseInt(limit, 10) : 50;
     return this.userService.getFavorites(req.user.id, pageNum, limitNum);
   }
 }

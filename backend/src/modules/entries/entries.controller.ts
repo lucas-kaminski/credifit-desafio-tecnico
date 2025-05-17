@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Delete,
-  Param,
   Query,
   UseGuards,
   Req,
@@ -29,32 +28,40 @@ export class EntriesController {
     return this.entriesService.getEntries(query);
   }
 
-  @Get('en/:word')
+  @Get('en/word')
   @UseGuards(JwtAuthGuard)
   async getWordDetails(
-    @Param('word') word: string,
+    @Query('word') word: string,
     @Req() req: RequestWithUser,
   ) {
-    return this.entriesService.getWordDetails(word, req.user.id);
+    const decodedWord = decodeURIComponent(word);
+    const details = await this.entriesService.getWordDetails(
+      decodedWord,
+      req.user.id,
+    );
+    console.log(details);
+    return details;
   }
 
-  @Post('en/:word/favorite')
+  @Post('en/word/favorite')
   @UseGuards(JwtAuthGuard)
   async addToFavorites(
-    @Param('word') word: string,
+    @Query('word') word: string,
     @Req() req: RequestWithUser,
   ) {
-    await this.entriesService.addToFavorites(word, req.user.id);
+    const decodedWord = decodeURIComponent(word);
+    await this.entriesService.addToFavorites(decodedWord, req.user.id);
     return { message: 'Word added to favorites' };
   }
 
-  @Delete('en/:word/unfavorite')
+  @Delete('en/word/unfavorite')
   @UseGuards(JwtAuthGuard)
   async removeFromFavorites(
-    @Param('word') word: string,
+    @Query('word') word: string,
     @Req() req: RequestWithUser,
   ) {
-    await this.entriesService.removeFromFavorites(word, req.user.id);
+    const decodedWord = decodeURIComponent(word);
+    await this.entriesService.removeFromFavorites(decodedWord, req.user.id);
     return { message: 'Word removed from favorites' };
   }
 }

@@ -97,7 +97,7 @@ describe('UserController', () => {
 
       await controller.getHistory(mockRequest);
 
-      expect(mockUserService.getHistory).toHaveBeenCalledWith('user-id', 1, 10);
+      expect(mockUserService.getHistory).toHaveBeenCalledWith('user-id', 1, 50);
     });
   });
 
@@ -141,7 +141,7 @@ describe('UserController', () => {
       expect(mockUserService.getFavorites).toHaveBeenCalledWith(
         'user-id',
         1,
-        10,
+        50,
       );
     });
   });

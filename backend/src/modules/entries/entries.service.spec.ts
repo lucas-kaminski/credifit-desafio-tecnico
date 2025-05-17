@@ -7,8 +7,6 @@ import { DictionaryWord } from '../../shared/services/dictionary.service';
 
 describe('EntriesService', () => {
   let service: EntriesService;
-  let prismaService: PrismaService;
-  let dictionaryService: DictionaryService;
 
   const mockPrismaService = {
     word: {
@@ -46,8 +44,6 @@ describe('EntriesService', () => {
     }).compile();
 
     service = module.get<EntriesService>(EntriesService);
-    prismaService = module.get<PrismaService>(PrismaService);
-    dictionaryService = module.get<DictionaryService>(DictionaryService);
   });
 
   afterEach(() => {
@@ -94,6 +90,29 @@ describe('EntriesService', () => {
         totalPages: 1,
         hasNext: false,
         hasPrev: false,
+      });
+    });
+
+    it('should use default pagination values', async () => {
+      mockPrismaService.word.findMany.mockResolvedValueOnce(mockWords);
+      mockPrismaService.word.count.mockResolvedValueOnce(100);
+
+      const result = await service.getEntries({});
+
+      expect(result).toEqual({
+        results: ['test1', 'test2', 'test3'],
+        totalDocs: 100,
+        page: 1,
+        totalPages: 2,
+        hasNext: true,
+        hasPrev: false,
+      });
+      expect(mockPrismaService.word.findMany).toHaveBeenCalledWith({
+        where: {},
+        skip: 0,
+        take: 50,
+        orderBy: { WORD: 'asc' },
+        select: { WORD: true },
       });
     });
   });
