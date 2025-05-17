@@ -8,27 +8,43 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
+
     try {
       const res = await fetch(API_ENDPOINTS.auth.signin, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
+
+      const data = await res.json();
+
       if (!res.ok) {
-        const data = await res.json();
         setError(data.message || 'Credenciais inválidas');
         return;
       }
-      const data = await res.json();
-      document.cookie = `auth_token=${data.token}; path=/`;
+
+      if (!data.token) {
+        setError('Erro ao autenticar: token não recebido');
+        return;
+      }
+
+      // Set the auth token cookie with proper attributes
+      document.cookie = `auth_token=${data.token}; path=/; secure; samesite=strict`;
+
+      // Redirect to home page
       router.push('/');
-    } catch {
+    } catch (err) {
+      console.error('Erro durante o login:', err);
       setError('Erro ao conectar com o servidor');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -61,6 +77,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </Box>
             <Box>
@@ -71,6 +88,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </Box>
             {error && (
@@ -78,7 +96,13 @@ export default function LoginPage() {
                 {error}
               </Text>
             )}
-            <Button colorScheme="purple" size="md" type="submit">
+            <Button
+              colorScheme="purple"
+              size="md"
+              type="submit"
+              isLoading={isLoading}
+              loadingText="Entrando..."
+            >
               Entrar
             </Button>
             <Text

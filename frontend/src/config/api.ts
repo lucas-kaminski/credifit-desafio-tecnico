@@ -11,9 +11,12 @@ export const API_ENDPOINTS = {
   },
   entries: {
     list: `${API_URL}/entries/en`,
-    details: (word: string) => `${API_URL}/entries/en/${word}`,
-    favorite: (word: string) => `${API_URL}/entries/en/${word}/favorite`,
-    unfavorite: (word: string) => `${API_URL}/entries/en/${word}/unfavorite`,
+    details: (word: string) =>
+      `${API_URL}/entries/en/word?word=${encodeURIComponent(word)}`,
+    favorite: (word: string) =>
+      `${API_URL}/entries/en/word/favorite?word=${encodeURIComponent(word)}`,
+    unfavorite: (word: string) =>
+      `${API_URL}/entries/en/word/unfavorite?word=${encodeURIComponent(word)}`,
   },
   user: {
     profile: `${API_URL}/user/me`,
