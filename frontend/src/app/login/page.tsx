@@ -1,5 +1,5 @@
 'use client';
-import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_ENDPOINTS } from '@/config/api';
@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const toast = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +43,13 @@ export default function LoginPage() {
 
       // Set the auth token cookie with proper attributes
       document.cookie = `auth_token=${token}; path=/; secure; samesite=strict`;
+
+      toast({
+        title: 'Login realizado com sucesso!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
 
       // Redirect to home page
       router.push('/');

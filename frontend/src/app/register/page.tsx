@@ -1,5 +1,5 @@
 'use client';
-import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_ENDPOINTS } from '@/config/api';
@@ -11,6 +11,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+  const toast = useToast();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +33,15 @@ export default function RegisterPage() {
         setError(data.message || 'Erro ao criar conta');
         return;
       }
+
+      toast({
+        title: 'Conta criada com sucesso!',
+        description: 'Você será redirecionado para a página de login.',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+
       router.push('/login');
     } catch {
       setError('Erro ao conectar com o servidor');
