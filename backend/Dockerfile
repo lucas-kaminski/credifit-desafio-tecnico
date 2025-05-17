@@ -11,10 +11,7 @@ COPY . .
 
 RUN npx prisma generate
 
-RUN yarn build
-
-RUN ls -la dist/ || echo "dist directory is empty"
-RUN find dist -type f || echo "No files found in dist"
+RUN yarn build && ls -la dist/
 
 ENV NODE_ENV=production
 
