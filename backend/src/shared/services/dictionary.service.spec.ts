@@ -79,9 +79,9 @@ describe('DictionaryService', () => {
     it('should throw NotFoundException when API returns 404', async () => {
       const error = new AxiosError(
         'Not Found',
-        undefined,
-        undefined,
-        undefined,
+        '404',
+        {} as InternalAxiosRequestConfig,
+        {},
         {
           status: 404,
           statusText: 'Not Found',
@@ -90,6 +90,13 @@ describe('DictionaryService', () => {
           data: {},
         },
       );
+      error.response = {
+        status: 404,
+        statusText: 'Not Found',
+        headers: {},
+        config: {} as InternalAxiosRequestConfig,
+        data: {},
+      };
       mockedAxios.get.mockRejectedValueOnce(error);
 
       await expect(service.getWord('nonexistent')).rejects.toThrow(
