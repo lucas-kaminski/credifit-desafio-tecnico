@@ -1,0 +1,15 @@
+backend/node_modules/
+frontend/node_modules/
+shared/node_modules/
+
+backend/.env*
+!backend/.env.template
+backend/downloads/*
+!backend/downloads/.gitkeep
+backend/dist/*
+
+frontend/.env*
+!frontend/.env.template
+
+
+shared/.env* 
