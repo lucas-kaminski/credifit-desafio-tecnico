@@ -2,30 +2,34 @@
 
 > This is a challenge by [Coodesh](https://coodesh.com/)
 
-Um dicionário em inglês para buscar palavras, aprender mais sobre elas e as que mais gostar, salvar como favorita!
+Um dicionário de inglês que permite buscar palavras, aprender seu significados, como falar, sinônimos e antônimos, e para as que mais gostar, salvar como favorita!
 
 Para conhecer o projeto, acesse o site [wordz.lucas-kaminski.dev](https://wordz.lucas-kaminski.dev), faça seu cadastro e comece a procurar palavras!
 
+Quando gostar de uma palavra, pode clicar no botão de compartilhar para copiar o link da palavra e compartilhar com amigos!
+
 Feito para como entrega para o desafio técnico da [Coodesh](https://coodesh.com/), para mais informações, acesse o arquivo [original-readme.md](original-readme.md) e saiba a definição inicial e detalhes sobre a proposta.
+
+A branch [`main`](https://github.com/lucas-kaminski/credifit-desafio-tecnico/tree/main) continuará sendo atualizada até ser completado todos os requisitos, caso queira ver exatamente o código que foi entregue junto com o envio do vídeo de apresentação, acesse a branch [`snapshot-entrega-final`](https://github.com/lucas-kaminski/credifit-desafio-tecnico/tree/snapshot-entrega-final). Verifique o [dev log](#log-de-desenvolvimento) para mais detalhes sobre o que foi desenvolvido após a entrega.
 
 ## Sumário
 
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
-- [Instalação e uso](#instalação-e-uso)
+- [Instalação e uso](#instalação-e-inicialização-do-projeto)
 - [Log de desenvolvimento](#log-de-desenvolvimento)
 - [Checklist da entrega](#checklist-da-entrega)
 - [Backlog](#backlog)
 
 ## Tecnologias utilizadas
 
-Tratando de um projeto end to end, optou-se por utilizar tecnologias que tinha um match com a proposta do desafio, além de ser uma lista de tecnologias que eu utilizo no meu dia a dia em outros projetos.
+Tratando-se de um projeto end to end, optou-se por utilizar tecnologias que tinha um match com a descrição da vaga, além de serem tecnologias que eu utilizo no meu dia a dia em outros projetos em produção.
 
 ### Infraestrutura do projeto
 
 - Monorepo com backend e frontend;
-- Docker orquestrado pelo docker compose para containerização dos serviços;
+- Docker orquestrado pelo docker compose para containerização dos serviços utilizados no projeto;
 - Workflows de Continuous Integration com Github Actions;
-- Workflow de Continuous Deployment em VPS pessoal com Nginx previamente instalado e configurado como reverse proxy junto com a ferramente Certbot para administração de certificados SSL.
+- Workflow de Continuous Deployment com Github Actions e actions apontadas para uma VPS pessoal, com Nginx previamente instalado e configurado como reverse proxy junto com a ferramente Certbot para administração de certificados SSL. Permite que o projeto seja acessado através de um domínio personalizado, o [wordz.lucas-kaminski.dev](https://wordz.lucas-kaminski.dev) para o frontend e o [backend-wordz.lucas-kaminski.dev](https://backend-wordz.lucas-kaminski.dev) para o backend.
 
 ### Banco de dados
 
@@ -74,50 +78,55 @@ Os comandos abaixo são instruções para execução em ambiente Linux, caso que
 1. Clone o repositório
 
 ```sh
+cd ~
 git clone https://github.com/lucas-kaminski/credifit-desafio-tecnico.git
 ```
 
 2. Instale as dependências do backend
 
 ```sh
-cd backend
+cd credifit-desafio-tecnico/backend
 yarn install
 ```
 
-3. Copie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente
+3. Copie o arquivo `.env.template` para `.env` e configure as variáveis de ambiente
+
+```sh
+cp .env.template .env
+```
 
 4. Instancie o banco de dados
 
 ```sh
-cd credifit-desafio-tecnico
+cd credifit-desafio-tecnico/backend
 docker compose up -d db
 ```
 
 5. Alimente o banco de dados com a wordList
 
 ```sh
-cd backend
+cd credifit-desafio-tecnico/backend
 yarn seed:database
 ```
 
 6. Inicie o servidor
 
 ```sh
-cd backend
+cd credifit-desafio-tecnico/backend
 yarn start:dev
 ```
 
 7. Instale as dependências do frontend
 
 ```sh
-cd frontend
+cd credifit-desafio-tecnico/frontend
 yarn install
 ```
 
 8. Inicie o servidor
 
 ```sh
-cd frontend
+cd credifit-desafio-tecnico/frontend
 yarn dev
 ```
 
@@ -169,6 +178,14 @@ Toda vez que é citado uma task, é referente ao [backlog](#backlog) e a sua def
     - PWA
     - Unit ou E2E tests
 - Como falta pouco tempo para a entrega (menos de 12 horas), é necessário eu decidir o que vou priorizar para entrega e o que vou deixar como não priorizado.
+- Realizei a entrega do projeto, enviando o link do repositório e realizando a gravação do vídeo de apresentação do projeto.
+
+### 18/05/2025
+
+- Durante o fim de semana, apresentei o projeto para amigos e familiares, recebendo feedbacks e sugestões de melhorias. Com eles, resolvi continuar o projeto tanto para implementar as melhorias que já tenho experiência quanto aprender algumas que não tenho tanto.
+- Criei o snapshot da entrega final do projeto, que é o código que foi entregue junto com o vídeo de apresentação.
+- Atualizei o README.md com as informações de entrega e próximos passos.
+- Refiz o backlog com o que faltava para ser implementado e atualizei o README.md com o backlog atualizado.
 
 ## Checklist da entrega
 
@@ -261,15 +278,16 @@ O checklist abaixo é uma lista de todos os itens que abstrai como demanda de de
 
 Esse é o backlog do projeto, onde eu defini as tasks e o que foi desenvolvido.
 
-Optei pela nomenclatura TASK-X para as tasks, onde X é o número da task na ordem da esteira de desenvolvimento, sendo uma alusão aos diversos sistemas de gerenciamento de projeto que conheço.
+Optei pela nomenclatura TASK-X para as tasks, onde X é o número da task na ordem da esteira de desenvolvimento, sendo uma alusão aos diversos sistemas de gerenciamento de projeto que existem, como o Jira ou Linear.
 
-Normalmente é utilizado o identificador da TASK como referência para o desenvolvimento, sendo o nome da branch a ser desenvolvida o mesmo nome da task, realizando PRs para a branch `develop` e, após a aprovação do PR, realizando o merge da branch `develop` para a branch `main` conforme o patch de atualização do projeto fosse liberado.
+Normalmente é utilizado o identificador da TASK como referência para o desenvolvimento, sendo o nome da branch a ser desenvolvida o mesmo nome da task, realizando PRs para a branch `develop` (concentra todo o código desenvolvido até o momento) e, após a aprovação do PR, realizando o merge da branch `develop` para a branch `main` conforme o patch de atualização do projeto fosse liberado (código entra em produção).
+
+Pode variar o fluxo do desenvolvimento, como ter uma branch anterior para testes e homologação com cliente antes de realizar o deploy, porém o citado acima acredito ser adequado para o desafio.
 
 ### TASK-0: Entendimento do desafio
 
 - [x] Fork e clone do repositório [Repositório no github](https://github.com/lucas-kaminski/credifit-desafio-tecnico)
-- [x] Definição das tecnologias da vaga e alinhamento
-      com o desafio
+- [x] Definição das tecnologias da vaga e alinhamento com o desafio
   - Tecnologias citadas na vaga
     - React
     - Nest
@@ -344,11 +362,7 @@ Normalmente é utilizado o identificador da TASK como referência para o desenvo
 ### TASK-4: Melhorias do backend
 
 - [x] Implementar script para importar wordList para o banco
-- [ ] Implementar cache de requisições à Free Dictionary API
-- [ ] Adicionar headers x-cache e x-response-time nas respostas
-- [ ] Implementar paginação por cursores
 - [x] Escrever testes unitários para todos endpoints
-- [ ] Documentar API com OpenAPI 3.0
 - [x] Dockerizar backend
 - [x] Preparar backend para deploy
 
@@ -369,9 +383,6 @@ Normalmente é utilizado o identificador da TASK como referência para o desenvo
 - [x] Implementar estilização com CSS Flexbox e Grid
 - [x] Implementar usabilidade e acessibilidade
 - [x] Implementar URL com parâmetros de busca
-- [ ] Implementar SSR
-- [ ] Implementar PWA
-- [ ] Escrever testes unitários ou E2E
 - [x] Dockerizar frontend
 - [x] Preparar frontend para deploy
 
@@ -387,3 +398,28 @@ Normalmente é utilizado o identificador da TASK como referência para o desenvo
 - [x] Adicionar referência ao challenge by Coodesh
 - [x] Documentar decisões técnicas e critérios de qualidade
 - [x] Checklist final de entrega
+
+### TASK-9: Melhorias do backend pt.2
+
+- [ ] Implementar cache de requisições à Free Dictionary API
+- [ ] Adicionar headers x-cache e x-response-time nas respostas
+- [ ] Implementar paginação por cursores
+- [ ] Documentar API com OpenAPI 3.0
+
+### TASK-10: Melhorias do frontend pt.2
+
+- [ ] Implementar SSR
+- [ ] Implementar PWA
+- [ ] Escrever testes unitários ou E2E
+
+### TASK-11: Melhorias de feedbacks
+
+- [ ] Botão de copiar link da palavra
+- [ ] Logo na tela de login e cadastro
+- [ ] Arrumar mensagens em inglês para português
+- [ ] Botão de recuperar senha com alert dizendo que está em construção (fora do escopo do desafio)
+- [ ] Menus da coluna em inglês, trocar para português
+- [ ] Label de procurar palavra em inglês, trocar para português
+- [ ] Colocar um informativo dizendo que são palavras importadas de um arquivo e que nem todas terão seu significado na API Free Dictionary
+- [ ] Melhorar erro de mensagem não encontrada, trocar botão "voltar" para "sair"
+- [ ] No histórico só aparecer palavras que tiveram significado na API Free Dictionary
