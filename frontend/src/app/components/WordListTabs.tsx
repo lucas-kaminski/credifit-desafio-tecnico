@@ -10,6 +10,10 @@ import {
   Flex,
   Button,
   Spinner,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react';
 
 interface WordItem {
@@ -110,8 +114,18 @@ export function WordListTabs({
 
   const renderWordGrid = (words: string[]) => (
     <Box>
+      <Alert status="info" mb={4} borderRadius="md">
+        <AlertIcon />
+        <Box>
+          <AlertTitle>Lista de palavras importada</AlertTitle>
+          <AlertDescription>
+            As palavras são importadas de um arquivo e nem todas terão seu
+            significado disponível na API Free Dictionary.
+          </AlertDescription>
+        </Box>
+      </Alert>
       <Input
-        placeholder="Search word..."
+        placeholder="Procurar palavra..."
         mb={4}
         value={search}
         onChange={(e) => {
@@ -178,9 +192,9 @@ export function WordListTabs({
   return (
     <Tabs variant="enclosed" colorScheme="purple" isFitted>
       <TabList>
-        <Tab>Word list</Tab>
-        <Tab>History</Tab>
-        <Tab>Favorites</Tab>
+        <Tab>Lista de palavras</Tab>
+        <Tab>Histórico</Tab>
+        <Tab>Favoritos</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>{renderWordGrid(filteredWords)}</TabPanel>

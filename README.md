@@ -418,8 +418,8 @@ Pode variar o fluxo do desenvolvimento, como ter uma branch anterior para testes
 - [x] Logo na tela de login e cadastro
 - [x] Arrumar mensagens em inglês para português
 - [x] Botão de recuperar senha com alert dizendo que está em construção (fora do escopo do desafio)
-- [ ] Menus da coluna em inglês, trocar para português
-- [ ] Label de procurar palavra em inglês, trocar para português
-- [ ] Colocar um informativo dizendo que são palavras importadas de um arquivo e que nem todas terão seu significado na API Free Dictionary
-- [ ] Melhorar erro de mensagem não encontrada, trocar botão "voltar" para "sair"
+- [x] Menus da coluna em inglês, trocar para português
+- [x] Label de procurar palavra em inglês, trocar para português
+- [x] Colocar um informativo dizendo que são palavras importadas de um arquivo e que nem todas terão seu significado na API Free Dictionary
+- [x] Melhorar erro de mensagem não encontrada, trocar botão "voltar" para "sair"
 - [ ] No histórico só aparecer palavras que tiveram significado na API Free Dictionary
