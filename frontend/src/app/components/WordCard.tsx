@@ -6,8 +6,14 @@ import {
   Flex,
   Link,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
-import { ArrowBackIcon, ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
+import {
+  ArrowBackIcon,
+  ArrowForwardIcon,
+  StarIcon,
+  CopyIcon,
+} from '@chakra-ui/icons';
 
 interface WordCardProps {
   word: string;
@@ -42,6 +48,22 @@ export function WordCard({
   isFavorite,
   onToggleFavorite,
 }: WordCardProps) {
+  const toast = useToast();
+
+  const handleCopyLink = () => {
+    const url = `${window.location.origin}?word=${encodeURIComponent(word)}`;
+    navigator.clipboard.writeText(url).then(() => {
+      toast({
+        title: 'Link copiado!',
+        description:
+          'O link da palavra foi copiado para a área de transferência.',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+    });
+  };
+
   return (
     <Box bg="purple.100" p={6} borderRadius="md" boxShadow="md" w="100%">
       <Flex justify="space-between" align="center" mb={2}>
@@ -50,17 +72,26 @@ export function WordCard({
             X
           </Button>
         )}
-        {onToggleFavorite && (
+        <Flex gap={2}>
           <IconButton
-            aria-label={
-              isFavorite ? 'Remove from favorites' : 'Add to favorites'
-            }
-            icon={<StarIcon />}
-            colorScheme={isFavorite ? 'yellow' : 'gray'}
-            variant={isFavorite ? 'solid' : 'ghost'}
-            onClick={onToggleFavorite}
+            aria-label="Copiar link"
+            icon={<CopyIcon />}
+            colorScheme="purple"
+            variant="ghost"
+            onClick={handleCopyLink}
           />
-        )}
+          {onToggleFavorite && (
+            <IconButton
+              aria-label={
+                isFavorite ? 'Remove from favorites' : 'Add to favorites'
+              }
+              icon={<StarIcon />}
+              colorScheme={isFavorite ? 'yellow' : 'gray'}
+              variant={isFavorite ? 'solid' : 'ghost'}
+              onClick={onToggleFavorite}
+            />
+          )}
+        </Flex>
       </Flex>
       <Box textAlign="center" py={6}>
         <Heading size="md">{word}</Heading>

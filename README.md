@@ -414,7 +414,7 @@ Pode variar o fluxo do desenvolvimento, como ter uma branch anterior para testes
 
 ### TASK-11: Melhorias de feedbacks
 
-- [ ] Botão de copiar link da palavra
+- [x] Botão de copiar link da palavra
 - [ ] Logo na tela de login e cadastro
 - [ ] Arrumar mensagens em inglês para português
 - [ ] Botão de recuperar senha com alert dizendo que está em construção (fora do escopo do desafio)
