@@ -200,15 +200,17 @@ export function WordCard({
         </Box>
       )}
       {sourceUrls && sourceUrls.length > 0 && (
-        <Box mt={6} textAlign="center">
-          <Text fontSize="sm" color="gray.600">
-            Fonte{sourceUrls.length > 1 ? 's' : ''}:{' '}
+        <Box mt={6}>
+          <Text fontSize="sm" color="gray.600" mb={2}>
+            Fonte{sourceUrls.length > 1 ? 's' : ''}:
+          </Text>
+          <Flex direction="column" gap={2}>
             {sourceUrls.map((url, idx) => (
-              <Link key={idx} href={url} isExternal color="purple.700" mx={1}>
+              <Link key={idx} href={url} isExternal color="purple.700">
                 {url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
               </Link>
             ))}
-          </Text>
+          </Flex>
         </Box>
       )}
     </Box>

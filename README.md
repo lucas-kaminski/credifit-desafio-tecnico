@@ -423,3 +423,5 @@ Pode variar o fluxo do desenvolvimento, como ter uma branch anterior para testes
 - [x] Colocar um informativo dizendo que são palavras importadas de um arquivo e que nem todas terão seu significado na API Free Dictionary
 - [x] Melhorar erro de mensagem não encontrada, trocar botão "voltar" para "sair"
 - [x] No histórico só aparecer palavras que tiveram significado na API Free Dictionary
+- [x] Fontes ficarem empilhadas uma embaixo da outra
+- [ ] Colocar informativo no histórico e no favoritos
