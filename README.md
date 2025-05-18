@@ -422,4 +422,4 @@ Pode variar o fluxo do desenvolvimento, como ter uma branch anterior para testes
 - [x] Label de procurar palavra em inglês, trocar para português
 - [x] Colocar um informativo dizendo que são palavras importadas de um arquivo e que nem todas terão seu significado na API Free Dictionary
 - [x] Melhorar erro de mensagem não encontrada, trocar botão "voltar" para "sair"
-- [ ] No histórico só aparecer palavras que tiveram significado na API Free Dictionary
+- [x] No histórico só aparecer palavras que tiveram significado na API Free Dictionary

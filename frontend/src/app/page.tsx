@@ -190,6 +190,10 @@ function HomeContent() {
           antonyms,
           sourceUrls,
         });
+        setHistory((prev) => {
+          const now = new Date().toISOString();
+          return [{ word: selectedWord, created_at: now }, ...prev];
+        });
       })
       .catch((error) => {
         console.error('Error fetching word details:', error);
@@ -259,11 +263,6 @@ function HomeContent() {
 
   const handleSelectWord = (word: string) => {
     setSelectedWord(word);
-    setHistory((prev) => {
-      const now = new Date().toISOString();
-      const filteredHistory = prev.filter((item) => item.word !== word);
-      return [{ word, created_at: now }, ...filteredHistory];
-    });
   };
 
   const handleToggleFavorite = async (word: string) => {
