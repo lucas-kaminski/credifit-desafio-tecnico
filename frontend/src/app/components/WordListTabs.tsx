@@ -162,9 +162,25 @@ export function WordListTabs({
     hasMore: boolean,
     loadingMore: boolean,
     onLoadMore: () => void,
-    lastElementRef: (node: HTMLButtonElement | null) => void
+    lastElementRef: (node: HTMLButtonElement | null) => void,
+    type: 'history' | 'favorites'
   ) => (
     <Box>
+      <Alert status="info" mb={4} borderRadius="md">
+        <AlertIcon />
+        <Box>
+          <AlertTitle>
+            {type === 'history'
+              ? 'Histórico de palavras'
+              : 'Palavras favoritas'}
+          </AlertTitle>
+          <AlertDescription>
+            {type === 'history'
+              ? 'Aqui você encontra todas as palavras que você já consultou.'
+              : 'Aqui você encontra todas as palavras que você marcou como favoritas.'}
+          </AlertDescription>
+        </Box>
+      </Alert>
       <Flex direction="column" gap={4}>
         <Flex wrap="wrap" gap={2}>
           {items.map((item, idx) => (
@@ -204,7 +220,8 @@ export function WordListTabs({
             hasMoreHistory,
             loadingMoreHistory,
             onLoadMoreHistory,
-            lastHistoryElementRef
+            lastHistoryElementRef,
+            'history'
           )}
         </TabPanel>
         <TabPanel>
@@ -213,7 +230,8 @@ export function WordListTabs({
             hasMoreFavorites,
             loadingMoreFavorites,
             onLoadMoreFavorites,
-            lastFavoriteElementRef
+            lastFavoriteElementRef,
+            'favorites'
           )}
         </TabPanel>
       </TabPanels>
