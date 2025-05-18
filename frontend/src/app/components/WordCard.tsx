@@ -136,7 +136,7 @@ export function WordCard({
           flex={1}
           variant="outline"
         >
-          Voltar
+          Anterior
         </Button>
         <Button
           rightIcon={<ArrowForwardIcon />}
