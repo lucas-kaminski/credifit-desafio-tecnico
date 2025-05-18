@@ -3,22 +3,30 @@ import { Box, Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_ENDPOINTS } from '@/config/api';
+import { Logo } from '../components/Logo';
 import Head from 'next/head';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const toast = useToast();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setIsLoading(true);
 
     if (password.length < 6) {
-      setError('A senha deve ter pelo menos 6 caracteres');
+      toast({
+        title: 'Senha inválida',
+        description: 'A senha deve ter pelo menos 6 caracteres',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      setIsLoading(false);
       return;
     }
 
@@ -30,7 +38,14 @@ export default function RegisterPage() {
       });
       if (!res.ok) {
         const data = await res.json();
-        setError(data.message || 'Erro ao criar conta');
+        toast({
+          title: 'Erro ao criar conta',
+          description: data.message || 'Erro ao criar conta. Tente novamente.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+        setIsLoading(false);
         return;
       }
 
@@ -44,7 +59,15 @@ export default function RegisterPage() {
 
       router.push('/login');
     } catch {
-      setError('Erro ao conectar com o servidor');
+      toast({
+        title: 'Erro ao conectar',
+        description:
+          'Erro ao conectar com o servidor. Tente novamente mais tarde.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      setIsLoading(false);
     }
   };
 
@@ -64,14 +87,9 @@ export default function RegisterPage() {
         >
           <form onSubmit={handleRegister}>
             <Flex direction="column" gap={6} align="stretch">
-              <Text
-                as="h1"
-                fontSize="2xl"
-                fontWeight="bold"
-                textAlign="center"
-                color="purple.700"
-              >
-                Criar conta
+              <Logo />
+              <Text fontSize="lg" fontWeight="bold">
+                Crie sua conta
               </Text>
               <Box>
                 <Text mb={1}>Nome</Text>
@@ -81,6 +99,7 @@ export default function RegisterPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
               </Box>
               <Box>
@@ -91,6 +110,7 @@ export default function RegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
               </Box>
               <Box>
@@ -102,14 +122,16 @@ export default function RegisterPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
+                  disabled={isLoading}
                 />
               </Box>
-              {error && (
-                <Text color="red.500" fontSize="sm">
-                  {error}
-                </Text>
-              )}
-              <Button colorScheme="purple" size="md" type="submit">
+              <Button
+                colorScheme="purple"
+                size="md"
+                type="submit"
+                isLoading={isLoading}
+                loadingText="Criando conta..."
+              >
                 Criar conta
               </Button>
               <Text

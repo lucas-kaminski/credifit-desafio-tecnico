@@ -415,9 +415,9 @@ Pode variar o fluxo do desenvolvimento, como ter uma branch anterior para testes
 ### TASK-11: Melhorias de feedbacks
 
 - [x] Botão de copiar link da palavra
-- [ ] Logo na tela de login e cadastro
-- [ ] Arrumar mensagens em inglês para português
-- [ ] Botão de recuperar senha com alert dizendo que está em construção (fora do escopo do desafio)
+- [x] Logo na tela de login e cadastro
+- [x] Arrumar mensagens em inglês para português
+- [x] Botão de recuperar senha com alert dizendo que está em construção (fora do escopo do desafio)
 - [ ] Menus da coluna em inglês, trocar para português
 - [ ] Label de procurar palavra em inglês, trocar para português
 - [ ] Colocar um informativo dizendo que são palavras importadas de um arquivo e que nem todas terão seu significado na API Free Dictionary

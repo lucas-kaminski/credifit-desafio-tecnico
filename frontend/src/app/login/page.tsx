@@ -3,18 +3,28 @@ import { Box, Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_ENDPOINTS } from '@/config/api';
+import { Logo } from '../components/Logo';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const toast = useToast();
 
+  const handleForgotPassword = () => {
+    toast({
+      title: 'Funcionalidade em desenvolvimento',
+      description:
+        'A recuperação de senha está fora do escopo do desafio técnico.',
+      status: 'info',
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setIsLoading(true);
 
     try {
@@ -27,12 +37,24 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || 'Credenciais inválidas');
+        toast({
+          title: 'Erro ao fazer login',
+          description: data.message || 'Email ou senha inválidos',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
         return;
       }
 
       if (!data.token) {
-        setError('Erro ao autenticar: token não recebido');
+        toast({
+          title: 'Erro ao autenticar',
+          description: 'Token não recebido. Tente novamente.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
         return;
       }
 
@@ -55,7 +77,14 @@ export default function LoginPage() {
       router.push('/');
     } catch (err) {
       console.error('Erro durante o login:', err);
-      setError('Erro ao conectar com o servidor');
+      toast({
+        title: 'Erro ao conectar',
+        description:
+          'Erro ao conectar com o servidor. Tente novamente mais tarde.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -73,14 +102,9 @@ export default function LoginPage() {
       >
         <form onSubmit={handleLogin}>
           <Flex direction="column" gap={6} align="stretch">
-            <Text
-              as="h1"
-              fontSize="2xl"
-              fontWeight="bold"
-              textAlign="center"
-              color="purple.700"
-            >
-              Login
+            <Logo />
+            <Text fontSize="lg" fontWeight="bold">
+              Faça login para continuar
             </Text>
             <Box>
               <Text mb={1}>Email</Text>
@@ -104,11 +128,16 @@ export default function LoginPage() {
                 disabled={isLoading}
               />
             </Box>
-            {error && (
-              <Text color="red.500" fontSize="sm">
-                {error}
-              </Text>
-            )}
+            <Text
+              fontSize="sm"
+              color="purple.500"
+              textAlign="right"
+              cursor="pointer"
+              onClick={handleForgotPassword}
+              _hover={{ textDecoration: 'underline' }}
+            >
+              Esqueci minha senha
+            </Text>
             <Button
               colorScheme="purple"
               size="md"
