@@ -200,6 +200,7 @@ Toda vez que é citado uma task, é referente ao [backlog](#backlog) e a sua def
 - Criei o snapshot da entrega final do projeto, que é o código que foi entregue junto com o vídeo de apresentação.
 - Atualizei o README.md com as informações de entrega e próximos passos.
 - Refiz o backlog com o que faltava para ser implementado e atualizei o README.md com o backlog atualizado.
+- Executei todos os pontos da task-11 e posterior a parte de cache definida na task-9.
 
 ## Checklist da entrega
 
