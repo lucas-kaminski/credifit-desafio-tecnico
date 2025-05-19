@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EntriesController } from './entries.controller';
 import { EntriesService } from './entries.service';
 import { DictionaryWord } from '../../shared/services/dictionary.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 
 describe('EntriesController', () => {
   let controller: EntriesController;
@@ -73,17 +73,39 @@ describe('EntriesController', () => {
       meanings: [],
       license: { name: '', url: '' },
       sourceUrls: [],
+      _cache: {
+        status: 'HIT',
+        responseTime: 100,
+      },
     };
 
     it('should return word details', async () => {
       mockEntriesService.getWordDetails.mockResolvedValueOnce(mockWordData);
 
-      const result = await controller.getWordDetails('test', mockRequest);
+      const localMockResponse = {
+        setHeader: jest.fn(() => {}),
+      } as unknown as Response;
+      const result = await controller.getWordDetails(
+        'test',
+        mockRequest,
+        localMockResponse,
+      );
 
-      expect(result).toEqual(mockWordData);
+      expect(result).toEqual({
+        word: 'test',
+        phonetics: [],
+        meanings: [],
+        license: { name: '', url: '' },
+        sourceUrls: [],
+      });
       expect(mockEntriesService.getWordDetails).toHaveBeenCalledWith(
         'test',
         'user-id',
+      );
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(localMockResponse.setHeader).toHaveBeenCalledWith(
+        'x-cache',
+        'HIT',
       );
     });
   });

@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DictionaryService, DictionaryWord } from './dictionary.service';
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { NotFoundException } from '@nestjs/common';
+import { RedisService } from './redis.service';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -9,9 +10,20 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 describe('DictionaryService', () => {
   let service: DictionaryService;
 
+  const mockRedisService = {
+    get: jest.fn(),
+    set: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [DictionaryService],
+      providers: [
+        DictionaryService,
+        {
+          provide: RedisService,
+          useValue: mockRedisService,
+        },
+      ],
     }).compile();
 
     service = module.get<DictionaryService>(DictionaryService);
@@ -61,7 +73,13 @@ describe('DictionaryService', () => {
 
       const result = await service.getWord('test');
 
-      expect(result).toEqual(mockWord);
+      expect(result).toEqual({
+        ...mockWord,
+        _cache: {
+          status: 'MISS',
+          responseTime: expect.any(Number) as unknown as number,
+        },
+      });
       const getSpy = jest.spyOn(mockedAxios, 'get');
       expect(getSpy).toHaveBeenCalledWith(
         'https://api.dictionaryapi.dev/api/v2/entries/en/test',
