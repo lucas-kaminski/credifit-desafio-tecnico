@@ -6,8 +6,14 @@ import {
   Flex,
   Link,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
-import { ArrowBackIcon, ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
+import {
+  ArrowBackIcon,
+  ArrowForwardIcon,
+  StarIcon,
+  CopyIcon,
+} from '@chakra-ui/icons';
 
 interface WordCardProps {
   word: string;
@@ -42,6 +48,22 @@ export function WordCard({
   isFavorite,
   onToggleFavorite,
 }: WordCardProps) {
+  const toast = useToast();
+
+  const handleCopyLink = () => {
+    const url = `${window.location.origin}?word=${encodeURIComponent(word)}`;
+    navigator.clipboard.writeText(url).then(() => {
+      toast({
+        title: 'Link copiado!',
+        description:
+          'O link da palavra foi copiado para a área de transferência.',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+    });
+  };
+
   return (
     <Box bg="purple.100" p={6} borderRadius="md" boxShadow="md" w="100%">
       <Flex justify="space-between" align="center" mb={2}>
@@ -50,17 +72,26 @@ export function WordCard({
             X
           </Button>
         )}
-        {onToggleFavorite && (
+        <Flex gap={2}>
           <IconButton
-            aria-label={
-              isFavorite ? 'Remove from favorites' : 'Add to favorites'
-            }
-            icon={<StarIcon />}
-            colorScheme={isFavorite ? 'yellow' : 'gray'}
-            variant={isFavorite ? 'solid' : 'ghost'}
-            onClick={onToggleFavorite}
+            aria-label="Copiar link"
+            icon={<CopyIcon />}
+            colorScheme="purple"
+            variant="ghost"
+            onClick={handleCopyLink}
           />
-        )}
+          {onToggleFavorite && (
+            <IconButton
+              aria-label={
+                isFavorite ? 'Remove from favorites' : 'Add to favorites'
+              }
+              icon={<StarIcon />}
+              colorScheme={isFavorite ? 'yellow' : 'gray'}
+              variant={isFavorite ? 'solid' : 'ghost'}
+              onClick={onToggleFavorite}
+            />
+          )}
+        </Flex>
       </Flex>
       <Box textAlign="center" py={6}>
         <Heading size="md">{word}</Heading>
@@ -105,7 +136,7 @@ export function WordCard({
           flex={1}
           variant="outline"
         >
-          Voltar
+          Anterior
         </Button>
         <Button
           rightIcon={<ArrowForwardIcon />}
@@ -169,15 +200,17 @@ export function WordCard({
         </Box>
       )}
       {sourceUrls && sourceUrls.length > 0 && (
-        <Box mt={6} textAlign="center">
-          <Text fontSize="sm" color="gray.600">
-            Fonte{sourceUrls.length > 1 ? 's' : ''}:{' '}
+        <Box mt={6}>
+          <Text fontSize="sm" color="gray.600" mb={2}>
+            Fonte{sourceUrls.length > 1 ? 's' : ''}:
+          </Text>
+          <Flex direction="column" gap={2}>
             {sourceUrls.map((url, idx) => (
-              <Link key={idx} href={url} isExternal color="purple.700" mx={1}>
+              <Link key={idx} href={url} isExternal color="purple.700">
                 {url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
               </Link>
             ))}
-          </Text>
+          </Flex>
         </Box>
       )}
     </Box>

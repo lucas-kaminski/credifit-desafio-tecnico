@@ -190,6 +190,10 @@ function HomeContent() {
           antonyms,
           sourceUrls,
         });
+        setHistory((prev) => {
+          const now = new Date().toISOString();
+          return [{ word: selectedWord, created_at: now }, ...prev];
+        });
       })
       .catch((error) => {
         console.error('Error fetching word details:', error);
@@ -259,11 +263,6 @@ function HomeContent() {
 
   const handleSelectWord = (word: string) => {
     setSelectedWord(word);
-    setHistory((prev) => {
-      const now = new Date().toISOString();
-      const filteredHistory = prev.filter((item) => item.word !== word);
-      return [{ word, created_at: now }, ...filteredHistory];
-    });
   };
 
   const handleToggleFavorite = async (word: string) => {
@@ -402,8 +401,8 @@ function HomeContent() {
         >
           {selectedWord ? (
             loadingWord ? (
-              <Flex align="center" justify="center" h="100%">
-                <Spinner size="lg" color="purple.500" />
+              <Flex h="100%" align="center" justify="center">
+                <Spinner size="xl" color="purple.500" />
               </Flex>
             ) : error ? (
               <Flex
@@ -413,11 +412,16 @@ function HomeContent() {
                 h="100%"
                 textAlign="center"
                 p={4}
+                gap={4}
               >
-                <Text color="red.500" fontSize="lg" mb={4}>
-                  {error}
+                <Text fontSize="xl" color="red.500" fontWeight="bold">
+                  Palavra não encontrada
                 </Text>
-                <Button colorScheme="purple" onClick={handleCloseWord}>
+                <Text color="gray.600">
+                  A palavra &quot;{selectedWord}&quot; não foi encontrada na
+                  API.
+                </Text>
+                <Button colorScheme="purple" onClick={handleCloseWord} mt={4}>
                   Voltar
                 </Button>
               </Flex>
@@ -517,11 +521,15 @@ function HomeContent() {
               h="100%"
               textAlign="center"
               p={4}
+              gap={4}
             >
-              <Text color="red.500" fontSize="lg" mb={4}>
-                {error}
+              <Text fontSize="xl" color="red.500" fontWeight="bold">
+                Palavra não encontrada
               </Text>
-              <Button colorScheme="purple" onClick={handleCloseWord}>
+              <Text color="gray.600">
+                A palavra &quot;{selectedWord}&quot; não foi encontrada na API.
+              </Text>
+              <Button colorScheme="purple" onClick={handleCloseWord} mt={4}>
                 Voltar
               </Button>
             </Flex>

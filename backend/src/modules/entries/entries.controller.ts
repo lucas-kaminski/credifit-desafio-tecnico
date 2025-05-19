@@ -6,7 +6,9 @@ import {
   Query,
   UseGuards,
   Req,
+  Res,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { EntriesService } from './entries.service';
 import { GetEntriesDto } from './dto/get-entries.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -33,14 +35,19 @@ export class EntriesController {
   async getWordDetails(
     @Query('word') word: string,
     @Req() req: RequestWithUser,
+    @Res({ passthrough: true }) res: Response,
   ) {
     const decodedWord = decodeURIComponent(word);
     const details = await this.entriesService.getWordDetails(
       decodedWord,
       req.user.id,
     );
-    console.log(details);
-    return details;
+
+    const { _cache, ...wordDetails } = details;
+    if (_cache) {
+      res.setHeader('x-cache', _cache.status);
+    }
+    return wordDetails;
   }
 
   @Post('en/word/favorite')

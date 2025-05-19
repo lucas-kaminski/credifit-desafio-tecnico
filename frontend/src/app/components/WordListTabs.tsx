@@ -10,6 +10,10 @@ import {
   Flex,
   Button,
   Spinner,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react';
 
 interface WordItem {
@@ -110,8 +114,18 @@ export function WordListTabs({
 
   const renderWordGrid = (words: string[]) => (
     <Box>
+      <Alert status="info" mb={4} borderRadius="md">
+        <AlertIcon />
+        <Box>
+          <AlertTitle>Lista de palavras importada</AlertTitle>
+          <AlertDescription>
+            As palavras são importadas de um arquivo e nem todas terão seu
+            significado disponível na API Free Dictionary.
+          </AlertDescription>
+        </Box>
+      </Alert>
       <Input
-        placeholder="Search word..."
+        placeholder="Procurar palavra..."
         mb={4}
         value={search}
         onChange={(e) => {
@@ -148,9 +162,25 @@ export function WordListTabs({
     hasMore: boolean,
     loadingMore: boolean,
     onLoadMore: () => void,
-    lastElementRef: (node: HTMLButtonElement | null) => void
+    lastElementRef: (node: HTMLButtonElement | null) => void,
+    type: 'history' | 'favorites'
   ) => (
     <Box>
+      <Alert status="info" mb={4} borderRadius="md">
+        <AlertIcon />
+        <Box>
+          <AlertTitle>
+            {type === 'history'
+              ? 'Histórico de palavras'
+              : 'Palavras favoritas'}
+          </AlertTitle>
+          <AlertDescription>
+            {type === 'history'
+              ? 'Aqui você encontra todas as palavras que você já consultou.'
+              : 'Aqui você encontra todas as palavras que você marcou como favoritas.'}
+          </AlertDescription>
+        </Box>
+      </Alert>
       <Flex direction="column" gap={4}>
         <Flex wrap="wrap" gap={2}>
           {items.map((item, idx) => (
@@ -178,9 +208,9 @@ export function WordListTabs({
   return (
     <Tabs variant="enclosed" colorScheme="purple" isFitted>
       <TabList>
-        <Tab>Word list</Tab>
-        <Tab>History</Tab>
-        <Tab>Favorites</Tab>
+        <Tab>Lista de palavras</Tab>
+        <Tab>Histórico</Tab>
+        <Tab>Favoritos</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>{renderWordGrid(filteredWords)}</TabPanel>
@@ -190,7 +220,8 @@ export function WordListTabs({
             hasMoreHistory,
             loadingMoreHistory,
             onLoadMoreHistory,
-            lastHistoryElementRef
+            lastHistoryElementRef,
+            'history'
           )}
         </TabPanel>
         <TabPanel>
@@ -199,7 +230,8 @@ export function WordListTabs({
             hasMoreFavorites,
             loadingMoreFavorites,
             onLoadMoreFavorites,
-            lastFavoriteElementRef
+            lastFavoriteElementRef,
+            'favorites'
           )}
         </TabPanel>
       </TabPanels>
