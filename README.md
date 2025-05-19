@@ -102,6 +102,13 @@ cd credifit-desafio-tecnico/backend
 docker compose up -d db
 ```
 
+4. Realize a migração do banco de dados
+
+```sh
+cd credifit-desafio-tecnico/backend
+yarn prisma:migrate
+```
+
 5. Alimente o banco de dados com a wordList
 
 ```sh
@@ -109,7 +116,14 @@ cd credifit-desafio-tecnico/backend
 yarn seed:database
 ```
 
-6. Inicie o servidor
+6. Instancie o Redis
+
+```sh
+cd credifit-desafio-tecnico/backend
+docker compose up -d redis
+```
+
+7. Inicie o servidor
 
 ```sh
 cd credifit-desafio-tecnico/backend
@@ -247,7 +261,7 @@ O checklist abaixo é uma lista de todos os itens que abstrai como demanda de de
 - [x] Docker no projeto
 - [x] Deploy em algum servidor
 - [ ] Paginação por cursores com retorno padrão
-- [ ] Cache o resultado das requisições com headers específicos na resposta
+- [x] Cache o resultado das requisições com headers específicos na resposta
 
 ### Frontend
 
@@ -401,8 +415,8 @@ Pode variar o fluxo do desenvolvimento, como ter uma branch anterior para testes
 
 ### TASK-9: Melhorias do backend pt.2
 
-- [ ] Implementar cache de requisições à Free Dictionary API
-- [ ] Adicionar headers x-cache e x-response-time nas respostas
+- [x] Implementar cache de requisições à Free Dictionary API
+- [x] Adicionar headers x-cache e x-response-time nas respostas
 - [ ] Implementar paginação por cursores
 - [ ] Documentar API com OpenAPI 3.0
 

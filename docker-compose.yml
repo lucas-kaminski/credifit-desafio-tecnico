@@ -24,6 +24,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
     networks:
       - app-network
     command: sh -c "npx prisma migrate deploy && yarn start:prod"
@@ -40,9 +41,21 @@ services:
     networks:
       - app-network
 
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    command: redis-server --appendonly yes
+
 networks:
   app-network:
     driver: bridge
 
 volumes:
   pgdata:
+  redis_data:
